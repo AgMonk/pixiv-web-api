@@ -9,6 +9,7 @@ import {ResUgoiraMeta} from "../types/response/ResUgoiraMeta";
 export class ApiIllustManga {
     instance: AxiosInstance
 
+
     constructor(instance: AxiosInstance) {
         this.instance = instance;
     }
