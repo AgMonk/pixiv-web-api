@@ -72,8 +72,12 @@ export class IllustMangaInfo {
 
 
 export class IllustMangaSearchResult {
+    relatedTags: Array<string>;
+
+
     constructor(props: { illustManga: object; popular: object; relatedTags: Array<string>; tagTranslation: object; }) {
         const {illustManga, popular, relatedTags, tagTranslation} = props
         //相关标签
+        this.relatedTags = relatedTags ? relatedTags : [];
     }
 }

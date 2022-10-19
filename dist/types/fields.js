@@ -26,9 +26,9 @@ var Author = /** @class */ (function () {
 exports.Author = Author;
 var Times = /** @class */ (function () {
     function Times(props) {
-        this.createDate = new Date(props.createDate);
-        this.uploadDate = new Date(props.uploadDate);
-        this.updateDate = new Date(props.updateDate);
+        this.createDate = props.createDate ? new Date(props.createDate) : undefined;
+        this.uploadDate = props.uploadDate ? new Date(props.uploadDate) : undefined;
+        this.updateDate = props.updateDate ? new Date(props.updateDate) : undefined;
     }
     return Times;
 }());

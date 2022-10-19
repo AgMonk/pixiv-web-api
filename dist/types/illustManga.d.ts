@@ -35,3 +35,12 @@ export declare class IllustMangaInfo {
         restrict: number;
     });
 }
+export declare class IllustMangaSearchResult {
+    relatedTags: Array<string>;
+    constructor(props: {
+        illustManga: object;
+        popular: object;
+        relatedTags: Array<string>;
+        tagTranslation: object;
+    });
+}

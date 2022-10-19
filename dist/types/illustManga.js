@@ -1,7 +1,7 @@
 "use strict";
 // noinspection JSUnresolvedVariable
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IllustMangaInfo = void 0;
+exports.IllustMangaSearchResult = exports.IllustMangaInfo = void 0;
 // noinspection JSUnresolvedVariable
 var fields_1 = require("./fields");
 var IllustMangaInfo = /** @class */ (function () {
@@ -56,3 +56,12 @@ var IllustMangaInfo = /** @class */ (function () {
     return IllustMangaInfo;
 }());
 exports.IllustMangaInfo = IllustMangaInfo;
+var IllustMangaSearchResult = /** @class */ (function () {
+    function IllustMangaSearchResult(props) {
+        var illustManga = props.illustManga, popular = props.popular, relatedTags = props.relatedTags, tagTranslation = props.tagTranslation;
+        //相关标签
+        this.relatedTags = relatedTags ? relatedTags : [];
+    }
+    return IllustMangaSearchResult;
+}());
+exports.IllustMangaSearchResult = IllustMangaSearchResult;

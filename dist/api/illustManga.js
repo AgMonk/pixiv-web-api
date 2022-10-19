@@ -11,6 +11,11 @@ var ApiIllustManga = /** @class */ (function () {
             return new illustManga_1.IllustMangaInfo(res.data.body);
         });
     };
+    ApiIllustManga.prototype.search = function (keywords) {
+        return this.instance.get("/ajax/search/artworks/" + keywords).then(function (res) {
+            return new illustManga_1.IllustMangaSearchResult(res.data.body);
+        });
+    };
     return ApiIllustManga;
 }());
 exports.ApiIllustManga = ApiIllustManga;

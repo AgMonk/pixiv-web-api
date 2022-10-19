@@ -28,9 +28,9 @@ export declare class Author {
     });
 }
 export declare class Times {
-    createDate: Date;
-    uploadDate: Date;
-    updateDate: Date;
+    createDate: Date | undefined;
+    uploadDate: Date | undefined;
+    updateDate: Date | undefined;
     constructor(props: {
         hasOwnProperty?: (arg0: string) => any;
         id?: any;

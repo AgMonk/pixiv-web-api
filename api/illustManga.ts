@@ -1,4 +1,4 @@
-import axios, {AxiosInstance} from "axios";
+import {AxiosInstance} from "axios";
 import {IllustMangaInfo, IllustMangaSearchResult} from "../types/illustManga";
 
 
