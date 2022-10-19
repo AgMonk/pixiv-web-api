@@ -4,10 +4,12 @@ import {ResSearchResult} from "../types/response/ResSearchResult";
 import {SearchParam} from "../types/params/illustmanga/SearchParam";
 import {ResBookmarkData} from "../types/response/ResBookmarkData";
 import {ResUgoiraMeta} from "../types/response/ResUgoiraMeta";
+import {FollowLatestParam} from "../types/params/FollowLatestParam";
+import {ResFollowLatestIllust} from "../types/response/ResFollowLatestIllust";
 
 
 export class ApiIllustManga {
-    instance: AxiosInstance
+    private instance: AxiosInstance
 
 
     constructor(instance: AxiosInstance) {
@@ -35,6 +37,12 @@ export class ApiIllustManga {
     ugoiraMeta(pid: number): Promise<ResUgoiraMeta> {
         return this.instance.get(`/ajax/illust/${pid}/ugoira_meta`).then(res => {
             return new ResUgoiraMeta(res.data.body)
+        })
+    }
+
+    followLatest(params:FollowLatestParam){
+        return this.instance.get(`/ajax/follow_latest/illust`, {params}).then(res => {
+            return new ResFollowLatestIllust(res.data.body)
         })
     }
 

@@ -4,8 +4,8 @@ import {AddNovelParam} from "../types/params/bookmark/AddNovelParam";
 
 
 export class ApiBookmark {
-    instance: AxiosInstance
-    token:string
+    private  instance: AxiosInstance
+    readonly token:string
 
 
     constructor(instance: AxiosInstance, token: string) {
