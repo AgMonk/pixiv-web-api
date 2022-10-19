@@ -1,5 +1,5 @@
 // noinspection JSUnresolvedVariable
-import {IllustMangaInfo} from "./illustManga";
+import {IllustMangaInfo} from "./response/IllustMangaInfo";
 
 export class Author {
     id: number;

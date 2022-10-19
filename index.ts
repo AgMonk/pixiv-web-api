@@ -1,6 +1,6 @@
-import {ApiIllustManga} from "./api/illustManga";
+import {ApiIllustManga} from "./src/api/illustManga";
 import {AxiosInstance, AxiosResponse} from "axios";
-import {PixivException} from "./types/PixivException";
+import {PixivException} from "./src/types/PixivException";
 
 export class Api {
     instance: AxiosInstance
