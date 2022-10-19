@@ -5,19 +5,16 @@ import {ApiBookmark} from "./src/api/ApiBookmark";
 
 export class Api {
     instance: AxiosInstance
-    token:string
-
+    token: string | undefined;
 
     illustManga: ApiIllustManga
-    bookmark: ApiBookmark
+    bookmark: ApiBookmark | undefined
 
-
-    constructor(instance: AxiosInstance,token:string) {
+    constructor(instance: AxiosInstance, token: string) {
         this.instance = instance;
-        this.token = token;
 
         instance.interceptors.response.use(res => {
-            console.log(`${new Date().toLocaleString()} Request Success: `,res)
+            console.log(`${new Date().toLocaleString()} Request Success: `, res)
             return res;
         }, error => {
             let response = <AxiosResponse>error.response;
@@ -34,11 +31,31 @@ export class Api {
             throw error;
         });
 
-        //todo 如果token为空 则自动请求token
-
-
         this.illustManga = new ApiIllustManga(instance);
-        this.bookmark = new ApiBookmark(instance,token);
+
+        //如果token为空 则自动请求token
+        if (token === '' || token === undefined) {
+           this.fetchToken()
+        } else {
+            this.token = token
+            this.initWithToken(token)
+        }
+    }
+
+    fetchToken() {
+        let pattern = /pixiv.context.token = "(.+?)";/
+        this.instance.get("/setting_user.php").then(res => {
+            let matcher = pattern.exec(res.data);
+            if (matcher) {
+                this.token = matcher[1]
+                console.log("获取到token:" + this.token)
+                this.initWithToken(this.token)
+            }
+        })
+    }
+
+    initWithToken(token: string){
+        this.bookmark = new ApiBookmark(this.instance, token);
     }
 }
 
