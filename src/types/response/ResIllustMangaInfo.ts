@@ -1,6 +1,6 @@
-import {Author, Counts, Size, Times} from "../fields";
+import {Author, BookmarkData, Counts, Size, Times} from "../fields";
 
-export class IllustMangaInfo {
+export class ResIllustMangaInfo {
     id: number
     description: string | undefined
     title: string | undefined
@@ -14,7 +14,7 @@ export class IllustMangaInfo {
     author: Author;
     r18: boolean;
     illustType: number;
-    bookmarkData: object;
+    bookmarkData: BookmarkData | undefined;
     r18g: boolean;
 
     constructor(props: { hasOwnProperty: (arg0: string) => any; id: any; userId: any; illustId: any; description: any; illustComment: any; title: any; illustTitle: any; urls: any; url: any; tags: { hasOwnProperty: (arg0: string) => any; tags: any; }; illustType: any; bookmarkData: any; xRestrict: number; restrict: number; }) {
@@ -50,11 +50,11 @@ export class IllustMangaInfo {
                 this.tagsType = "detail";
             }
         }
+        this.bookmarkData = props.bookmarkData?new BookmarkData(props.bookmarkData):undefined;
 
 
         this.title = props.title;
         this.illustType = Number(props.illustType);
-        this.bookmarkData = props.bookmarkData;
         this.r18 = props.xRestrict === 1;
         this.r18g = props.restrict === 1;
 

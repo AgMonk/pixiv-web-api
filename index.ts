@@ -11,7 +11,7 @@ export class Api {
         this.instance = instance;
 
         instance.interceptors.response.use(res => {
-            console.log("Request Success: ",res)
+            console.log(`${new Date().toLocaleString()} Request Success: `,res)
             return res;
         }, error => {
             let response = <AxiosResponse>error.response;

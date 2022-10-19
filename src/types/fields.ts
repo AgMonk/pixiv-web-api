@@ -1,5 +1,5 @@
 // noinspection JSUnresolvedVariable
-import {IllustMangaInfo} from "./response/IllustMangaInfo";
+import {ResIllustMangaInfo} from "./response/ResIllustMangaInfo";
 
 export class Author {
     id: number;
@@ -16,11 +16,11 @@ export class Author {
             this.avatar = props.profileImageUrl
         }
         if (props.hasOwnProperty('userIllusts')) {
-            let data = Object.create(IllustMangaInfo)
+            let data = Object.create(ResIllustMangaInfo)
             Object.keys(props.userIllusts)
                 .forEach(key => {
                     let item = props.userIllusts[key]
-                    data[key] = item ? new IllustMangaInfo(item) : null;
+                    data[key] = item ? new ResIllustMangaInfo(item) : null;
                 })
             this.userIllusts = data
         }
@@ -66,11 +66,22 @@ export class Size {
 }
 
 export class Popular{
-    permanent:Array<IllustMangaInfo>
-    recent:Array<IllustMangaInfo>
+    permanent:Array<ResIllustMangaInfo>
+    recent:Array<ResIllustMangaInfo>
 
     constructor(props: { permanent: any[]; recent: any[]; }) {
-        this.permanent = props.permanent.map(i=>new IllustMangaInfo(i));
-        this.recent = props.recent.map(i=>new IllustMangaInfo(i));
+        this.permanent = props.permanent.map(i=>new ResIllustMangaInfo(i));
+        this.recent = props.recent.map(i=>new ResIllustMangaInfo(i));
     }
+}
+
+export class BookmarkData{
+    id:number;
+    pri:boolean;
+
+    constructor(props: { id: any; private: boolean; }) {
+        this.id = Number(props.id)
+        this.pri = props.private
+    }
+
 }

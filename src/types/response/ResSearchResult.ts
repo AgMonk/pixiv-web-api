@@ -1,11 +1,11 @@
 import {Author, Popular} from "../fields";
-import {IllustMangaInfo} from "./IllustMangaInfo";
+import {ResIllustMangaInfo} from "./ResIllustMangaInfo";
 
-export class SearchResult {
+export class ResSearchResult {
     relatedTags: Array<string>;
     tagTranslation: object;
     popular: Popular | undefined;
-    data: Array<IllustMangaInfo>;
+    data: Array<ResIllustMangaInfo>;
     total: number;
     users: Array<Author>;
 
@@ -17,7 +17,7 @@ export class SearchResult {
         this.tagTranslation = tagTranslation ? tagTranslation : {};
         this.popular = popular ? new Popular(popular) : undefined;
         this.total = illustManga.total
-        this.data = illustManga.data.map(i => new IllustMangaInfo(i));
+        this.data = illustManga.data.map(i => new ResIllustMangaInfo(i));
 
         this.users = [];
         let userId: number[] = [];
