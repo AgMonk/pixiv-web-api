@@ -1,5 +1,6 @@
 import {AxiosInstance} from "axios";
 import {AddIllustParam} from "../types/params/bookmark/AddIllustParam";
+import {AddNovelParam} from "../types/params/bookmark/AddNovelParam";
 
 
 export class ApiBookmark {
@@ -41,6 +42,34 @@ export class ApiBookmark {
         })
     }
 
+    addNovel(param: AddNovelParam): Promise<number> {
+        return this.instance.post("/ajax/novels/bookmarks/add", param,{
+            headers:{
+                'x-csrf-token': this.token,
+            }
+        }).then(res => {
+            return res.data.body
+        })
+    }
 
+    delNovel(bookmarkId: number): Promise<any> {
+        let formData = new FormData();
+        formData.append("book_id",bookmarkId+"")
+        formData.append("del","1")
+        return this.instance.post("/ajax/novels/bookmarks/delete", formData, {
+            headers:{
+                "Content-Type": "multipart/form-data",
+                'x-csrf-token': this.token,
+            }
+        })
+    }
+
+    delNovels(bookmarkIds: Array<number>): Promise<any> {
+        return this.instance.post("/ajax/novels/bookmarks/remove", {bookmarkIds},{
+            headers:{
+                'x-csrf-token': this.token,
+            }
+        })
+    }
 }
 
