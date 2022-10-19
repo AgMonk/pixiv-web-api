@@ -1,3 +1,4 @@
+import { IllustMangaInfo } from "./illustManga";
 export declare class Author {
     id: number;
     name: string;
@@ -108,5 +109,13 @@ export declare class Size {
         restrict?: number;
         height?: any;
         width?: any;
+    });
+}
+export declare class Popular {
+    permanent: Array<IllustMangaInfo>;
+    recent: Array<IllustMangaInfo>;
+    constructor(props: {
+        permanent: any[];
+        recent: any[];
     });
 }

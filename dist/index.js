@@ -7,7 +7,7 @@ var Api = /** @class */ (function () {
     function Api(instance) {
         this.instance = instance;
         instance.interceptors.response.use(function (res) {
-            console.log(res);
+            console.log("Request Success: ", res);
             return res;
         }, function (error) {
             var response = error.response;

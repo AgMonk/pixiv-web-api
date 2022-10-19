@@ -11,7 +11,7 @@ export class Api {
         this.instance = instance;
 
         instance.interceptors.response.use(res => {
-            console.log(res)
+            console.log("Request Success: ",res)
             return res;
         }, error => {
             let response = <AxiosResponse>error.response;

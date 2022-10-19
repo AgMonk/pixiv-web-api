@@ -33,32 +33,44 @@ export class Times {
     updateDate: Date | undefined;
 
     constructor(props: { hasOwnProperty?: (arg0: string) => any; id?: any; illustId?: any; description?: any; illustComment?: any; title?: any; illustTitle?: any; urls?: any; url?: any; tags?: { hasOwnProperty: (arg0: string) => any; tags: any; }; illustType?: any; bookmarkData?: any; xRestrict?: number; restrict?: number; createDate?: any; uploadDate?: any; updateDate?: any; }) {
-        this.createDate = props.createDate?new Date(props.createDate):undefined
-        this.uploadDate = props.uploadDate?new Date(props.uploadDate):undefined
-        this.updateDate = props.updateDate?new Date(props.updateDate):undefined
+        this.createDate = props.createDate ? new Date(props.createDate) : undefined
+        this.uploadDate = props.uploadDate ? new Date(props.uploadDate) : undefined
+        this.updateDate = props.updateDate ? new Date(props.updateDate) : undefined
     }
 }
 
 export class Counts {
-    bookmark:number|undefined
-    comment:number|undefined
-    like:number|undefined
-    page:number|undefined
-    view:number|undefined
+    bookmark: number | undefined
+    comment: number | undefined
+    like: number | undefined
+    page: number | undefined
+    view: number | undefined
+
     constructor(props: { hasOwnProperty?: (arg0: string) => any; id?: any; illustId?: any; description?: any; illustComment?: any; title?: any; illustTitle?: any; urls?: any; url?: any; tags?: { hasOwnProperty: (arg0: string) => any; tags: any; }; illustType?: any; bookmarkData?: any; xRestrict?: number; restrict?: number; bookmarkCount?: any; commentCount?: any; likeCount?: any; pageCount?: any; viewCount?: any; }) {
-        this.bookmark=props.bookmarkCount
-        this.comment=props.commentCount
-        this.like=props.likeCount
-        this.page=props.pageCount
-        this.view=props.viewCount
+        this.bookmark = props.bookmarkCount
+        this.comment = props.commentCount
+        this.like = props.likeCount
+        this.page = props.pageCount
+        this.view = props.viewCount
     }
 }
 
 export class Size {
-    height:number|undefined
-    width:number|undefined
+    height: number | undefined
+    width: number | undefined
+
     constructor(props: { hasOwnProperty?: (arg0: string) => any; id?: any; illustId?: any; description?: any; illustComment?: any; title?: any; illustTitle?: any; urls?: any; url?: any; tags?: { hasOwnProperty: (arg0: string) => any; tags: any; }; illustType?: any; bookmarkData?: any; xRestrict?: number; restrict?: number; height?: any; width?: any; }) {
         this.height = props.height;
         this.width = props.width;
+    }
+}
+
+export class Popular{
+    permanent:Array<IllustMangaInfo>
+    recent:Array<IllustMangaInfo>
+
+    constructor(props: { permanent: any[]; recent: any[]; }) {
+        this.permanent = props.permanent.map(i=>new IllustMangaInfo(i));
+        this.recent = props.recent.map(i=>new IllustMangaInfo(i));
     }
 }

@@ -61,6 +61,11 @@ var IllustMangaSearchResult = /** @class */ (function () {
         var illustManga = props.illustManga, popular = props.popular, relatedTags = props.relatedTags, tagTranslation = props.tagTranslation;
         //相关标签
         this.relatedTags = relatedTags ? relatedTags : [];
+        //标签翻译
+        this.tagTranslation = tagTranslation ? tagTranslation : {};
+        this.popular = popular ? new fields_1.Popular(popular) : undefined;
+        this.total = illustManga.total;
+        this.data = illustManga.data.map(function (i) { return new IllustMangaInfo(i); });
     }
     return IllustMangaSearchResult;
 }());

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Size = exports.Counts = exports.Times = exports.Author = void 0;
+exports.Popular = exports.Size = exports.Counts = exports.Times = exports.Author = void 0;
 // noinspection JSUnresolvedVariable
 var illustManga_1 = require("./illustManga");
 var Author = /** @class */ (function () {
@@ -52,3 +52,11 @@ var Size = /** @class */ (function () {
     return Size;
 }());
 exports.Size = Size;
+var Popular = /** @class */ (function () {
+    function Popular(props) {
+        this.permanent = props.permanent.map(function (i) { return new illustManga_1.IllustMangaInfo(i); });
+        this.recent = props.recent.map(function (i) { return new illustManga_1.IllustMangaInfo(i); });
+    }
+    return Popular;
+}());
+exports.Popular = Popular;

@@ -1,4 +1,4 @@
-import { Author, Counts, Size, Times } from "./fields";
+import { Author, Counts, Popular, Size, Times } from "./fields";
 export declare class IllustMangaInfo {
     id: number;
     description: string | undefined;
@@ -37,9 +37,19 @@ export declare class IllustMangaInfo {
 }
 export declare class IllustMangaSearchResult {
     relatedTags: Array<string>;
+    tagTranslation: object;
+    popular: Popular | undefined;
+    data: Array<IllustMangaInfo>;
+    total: number;
     constructor(props: {
-        illustManga: object;
-        popular: object;
+        illustManga: {
+            total: number;
+            data: Array<any>;
+        };
+        popular: {
+            permanent: any[];
+            recent: any[];
+        };
         relatedTags: Array<string>;
         tagTranslation: object;
     });
