@@ -8,8 +8,8 @@ export class Author {
     avatar: string | undefined;
     userIllusts: object | undefined;
 
-    constructor(props: { hasOwnProperty: any; id: any; illustId?: any; description?: any; illustComment?: any; title?: any; illustTitle?: any; urls?: any; url?: any; tags?: { hasOwnProperty: (arg0: string) => any; tags: any; }; illustType?: any; bookmarkData?: any; xRestrict?: number; restrict?: number; userName?: any; profileImageUrl?: any; userIllusts?: any; }) {
-        this.id = Number(props.id)
+    constructor(props: { hasOwnProperty: any; id?: any; userId: any; illustId?: any; description?: any; illustComment?: any; title?: any; illustTitle?: any; urls?: any; url?: any; tags?: { hasOwnProperty: (arg0: string) => any; tags: any; }; illustType?: any; bookmarkData?: any; xRestrict?: number; restrict?: number; userName?: any; profileImageUrl?: any; userIllusts?: any; }) {
+        this.id = Number(props.userId)
         this.name = props.userName.split("@")[0];
         this.fanbox = props.hasOwnProperty('fanboxPromotion')
         if (props.hasOwnProperty('profileImageUrl')) {

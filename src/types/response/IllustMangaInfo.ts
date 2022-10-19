@@ -16,7 +16,8 @@ export class IllustMangaInfo {
     illustType: number;
     bookmarkData: object;
     r18g: boolean;
-    constructor(props: { hasOwnProperty: (arg0: string) => any; id: any; illustId: any; description: any; illustComment: any; title: any; illustTitle: any; urls: any; url: any; tags: { hasOwnProperty: (arg0: string) => any; tags: any; }; illustType: any; bookmarkData: any; xRestrict: number; restrict: number; }) {
+
+    constructor(props: { hasOwnProperty: (arg0: string) => any; id: any; userId: any; illustId: any; description: any; illustComment: any; title: any; illustTitle: any; urls: any; url: any; tags: { hasOwnProperty: (arg0: string) => any; tags: any; }; illustType: any; bookmarkData: any; xRestrict: number; restrict: number; }) {
         if (props.hasOwnProperty("id")) {
             this.id = Number(props.id)
         } else if (props.hasOwnProperty("illustId")) {
