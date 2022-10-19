@@ -1,4 +1,4 @@
-import {Author, BookmarkData, Counts, Size, Times} from "../fields";
+import {Author, BookmarkData, IllustCounts, Size, Times} from "../fields";
 
 export class ResIllustMangaInfo {
     id: number
@@ -8,7 +8,7 @@ export class ResIllustMangaInfo {
     url: string | undefined
     tags: Array<any> | undefined
     tagsType: String | undefined
-    counts: Counts;
+    counts: IllustCounts;
     size: Size;
     times: Times;
     author: Author;
@@ -59,7 +59,7 @@ export class ResIllustMangaInfo {
         this.r18g = props.restrict === 1;
 
 
-        this.counts = new Counts(props)
+        this.counts = new IllustCounts(props)
         this.size = new Size(props)
         this.times = new Times(props)
         this.author = new Author(props);

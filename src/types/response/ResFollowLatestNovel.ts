@@ -1,5 +1,4 @@
-import {Thumbnails} from "./Thumbnails";
-import {ResIllustMangaInfo} from "./ResIllustMangaInfo";
+import {ResNovelInfo} from "./ResNovelInfo";
 
 export class ResFollowLatestNovel {
     tagTranslation: object;
@@ -11,8 +10,7 @@ export class ResFollowLatestNovel {
         this.tagTranslation = tagTranslation ? tagTranslation : {};
         if (thumbnails) {
             const novel = <Array<any>>thumbnails.novel
-            //todo 转换为小说对象
-            this.data = novel
+            this.data = novel.map(i => new ResNovelInfo(i))
         }
     }
 

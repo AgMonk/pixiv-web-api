@@ -8,7 +8,7 @@ export class Author {
     avatar: string | undefined;
     userIllusts: object | undefined;
 
-    constructor(props: { hasOwnProperty: any; id?: any; userId: any; illustId?: any; description?: any; illustComment?: any; title?: any; illustTitle?: any; urls?: any; url?: any; tags?: { hasOwnProperty: (arg0: string) => any; tags: any; }; illustType?: any; bookmarkData?: any; xRestrict?: number; restrict?: number; userName?: any; profileImageUrl?: any; userIllusts?: any; }) {
+    constructor(props: { bookmarkData?: any; description?: any; readingTime?: any; id?: any; xRestrict?: any; restrict?: any; title?: any; content?: any; url?: any; coverUrl?: any; language?: any; hasOwnProperty?: any; tags?: any; bookmarkCount?: number | undefined; commentCount?: number | undefined; pageCount?: any; textCount?: number | undefined; useWordCount?: number | undefined; wordCount?: number | undefined; characterCount?: number | undefined; viewCount?: number | undefined; illustId?: any; illustComment?: any; illustTitle?: any; urls?: any; illustType?: any; createDate?: any; uploadDate?: any; updateDate?: any; userId?: any; userName?: any; profileImageUrl?: any; userIllusts?: any }) {
         this.id = Number(props.userId)
         this.name = props.userName.split("@")[0];
         this.fanbox = props.hasOwnProperty('fanboxPromotion')
@@ -39,7 +39,7 @@ export class Times {
     }
 }
 
-export class Counts {
+export class IllustCounts {
     bookmark: number | undefined
     comment: number | undefined
     like: number | undefined
@@ -54,6 +54,27 @@ export class Counts {
         this.view = props.viewCount
     }
 }
+
+export class NovelCounts {
+    bookmark: number | undefined
+    comment: number | undefined
+    text: number | undefined
+    page: number | undefined
+    word: number | undefined
+    view: number | undefined
+    character: number | undefined
+
+    constructor(props: { bookmarkData?: any; description?: any; readingTime?: any; id?: any; xRestrict?: any; restrict?: any; title?: any; content?: any; url?: any; coverUrl?: any; language?: any; hasOwnProperty?: any; tags?: any; bookmarkCount?: number | undefined; commentCount?: number | undefined; pageCount?: any; textCount?: number | undefined; useWordCount?: number | undefined; wordCount?: number | undefined; characterCount?: number | undefined; viewCount?: number | undefined; illustId?: any; illustComment?: any; illustTitle?: any; urls?: any; illustType?: any; createDate?: any; uploadDate?: any; updateDate?: any; userId?: any; userName?: any; profileImageUrl?: any; userIllusts?: any }) {
+        this.bookmark = props.bookmarkCount
+        this.comment = props.commentCount
+        this.page = props.pageCount ? Number(props.pageCount) : undefined
+        this.text = props.textCount
+        this.word = props.wordCount
+        this.character = props.characterCount
+        this.view = props.viewCount
+    }
+}
+
 
 export class Size {
     height: number | undefined
