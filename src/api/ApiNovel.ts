@@ -9,9 +9,14 @@ export class ApiNovel{
         this.instance = instance;
     }
 
-    followLatest(params:FollowLatestParam){
+    followLatest(params: FollowLatestParam) {
         return this.instance.get(`/ajax/follow_latest/novel`, {params}).then(res => {
             return new ResFollowLatestNovel(res.data.body)
         })
     }
+
+    //todo 详情
+    //todo 搜索
+    //todo 查询系列
+
 }
