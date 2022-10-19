@@ -19,13 +19,19 @@ export class ResSearchResult {
         this.total = illustManga.total
         this.data = illustManga.data.map(i => new ResIllustMangaInfo(i));
 
-        this.users = [];
-        let userId: number[] = [];
-        this.data.map(i => i.author).forEach(user => {
-            if (userId.indexOf(user.id) === -1) {
-                userId.push(user.id)
-                this.users.push(user)
-            }
-        })
+        this.users = collectAuthor(this.data);
     }
+
+}
+
+export function collectAuthor(data: any[]): Array<Author> {
+    let users = <Array<Author>>[];
+    let userId: number[] = [];
+    data.map(i => i.author).forEach(user => {
+        if (userId.indexOf(user.id) === -1) {
+            userId.push(user.id)
+            users.push(user)
+        }
+    })
+    return users;
 }
