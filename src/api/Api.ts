@@ -21,7 +21,7 @@ export class Api {
     follow: ApiFollow | undefined;
     comments: ApiComment | undefined;
 
-    constructor(instance: AxiosInstance, token: string) {
+    constructor(instance: AxiosInstance, token?: string) {
         this.instance = instance;
 
         instance.interceptors.response.use(res => {
