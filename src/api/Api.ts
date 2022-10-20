@@ -21,10 +21,6 @@ export class Api {
     follow: ApiFollow | undefined;
     comments: ApiComment | undefined;
 
-    isTokenReady(): boolean {
-        return this.token !== undefined;
-    }
-
     constructor(instance: AxiosInstance, token: string) {
         this.instance = instance;
 
@@ -60,9 +56,20 @@ export class Api {
         }
     }
 
+    static setCookie(phpSessionId: string, path: string) {
+        let day = 24 * 60 * 60 * 1000;
+        let date = new Date();
+        date.setTime(date.getTime() + 365 * day);
+        document.cookie = `PHPSESSID=${phpSessionId};path=${path};expires=${date.toUTCString()}`
+    }
+
+    isTokenReady(): boolean {
+        return this.token !== undefined;
+    }
+
     fetchToken() {
         let pattern = /pixiv.context.token = "(.+?)";/
-        this.instance.get("/setting_user.php").then(res => {
+        return this.instance.get("/setting_user.php").then(res => {
             let matcher = pattern.exec(res.data);
             if (matcher) {
                 this.token = matcher[1]
