@@ -1,10 +1,8 @@
 import {AxiosInstance} from "axios";
 import {ResIllustMangaInfo} from "../types/response/ResIllustMangaInfo";
 import {ResSearchResult} from "../types/response/ResSearchResult";
-import {SearchParam} from "../types/params/illustmanga/SearchParam";
 import {ResBookmarkData} from "../types/response/ResBookmarkData";
 import {ResUgoiraMeta} from "../types/response/ResUgoiraMeta";
-import {FollowLatestParam} from "../types/params/FollowLatestParam";
 import {ResFollowLatestIllust} from "../types/response/ResFollowLatestIllust";
 
 
@@ -22,7 +20,14 @@ export class ApiIllustManga {
         })
     }
 
-    search(keywords: string, params: SearchParam): Promise<ResSearchResult> {
+    search(keywords: string, params: {
+        p: number;
+        mode: "all" | "safe" | "r18";
+        order: "date_d" | "date";
+        lang: string | undefined;
+        scd: string | undefined;
+        ecd: string | undefined;
+    }): Promise<ResSearchResult> {
         return this.instance.get("/ajax/search/artworks/" + keywords, {params}).then(res => {
             return new ResSearchResult(res.data.body)
         })
@@ -40,7 +45,11 @@ export class ApiIllustManga {
         })
     }
 
-    followLatest(params:FollowLatestParam){
+    followLatest(params: {
+        p: number;
+        mod: "all" | "r18";
+        lang: string | undefined;
+    }) {
         return this.instance.get(`/ajax/follow_latest/illust`, {params}).then(res => {
             return new ResFollowLatestIllust(res.data.body)
         })

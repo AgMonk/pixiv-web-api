@@ -1,15 +1,18 @@
 import {AxiosInstance} from "axios";
-import {FollowLatestParam} from "../types/params/FollowLatestParam";
 import {ResFollowLatestNovel} from "../types/response/ResFollowLatestNovel";
 
-export class ApiNovel{
+export class ApiNovel {
     private instance: AxiosInstance;
 
     constructor(instance: AxiosInstance) {
         this.instance = instance;
     }
 
-    followLatest(params: FollowLatestParam) {
+    followLatest(params: {
+        p: number;
+        mod: "all" | "r18";
+        lang: string | undefined;
+    }) {
         return this.instance.get(`/ajax/follow_latest/novel`, {params}).then(res => {
             return new ResFollowLatestNovel(res.data.body)
         })

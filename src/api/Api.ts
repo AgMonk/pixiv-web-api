@@ -21,6 +21,10 @@ export class Api {
     follow: ApiFollow | undefined;
     comments: ApiComment | undefined;
 
+    isTokenReady(): boolean {
+        return this.token !== undefined;
+    }
+
     constructor(instance: AxiosInstance, token: string) {
         this.instance = instance;
 
@@ -68,7 +72,7 @@ export class Api {
         })
     }
 
-    initWithToken(token: string){
+    initWithToken(token: string) {
         this.bookmark = new ApiBookmark(this.instance, token);
         this.follow = new ApiFollow(this.instance, token)
         this.comments = new ApiComment(this.instance, token)
