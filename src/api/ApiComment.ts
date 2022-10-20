@@ -10,9 +10,9 @@ export class ApiComment {
     }
 
     // 查询作品评论（根）
-    illustsRoots(param: { illust_id: number; page: number; size: number; lang?: string; }): Promise<{ comments: Array<any>, hasNext: boolean }> {
-        const {size, page, lang, illust_id} = param
-        const params = {lang, illust_id, offset: (page - 1) * size, limit: size}
+    illustsRoots(param: { illustId: number; page: number; size: number; lang?: string; }): Promise<{ comments: Array<any>, hasNext: boolean }> {
+        const {size, page, lang, illustId} = param
+        const params = {lang, illust_id: illustId, offset: (page - 1) * size, limit: size}
         return this.instance.get("/ajax/illusts/comments/roots", {params}).then(res => {
             return res.data.body
         })
