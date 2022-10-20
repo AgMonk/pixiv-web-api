@@ -1,4 +1,4 @@
-import {Thumbnails} from "./comom";
+import {Thumbnails} from "./commom";
 
 /**
  * 用户作品概况
@@ -62,6 +62,10 @@ export interface CommissionRequestSent {
 
 export interface ZoneConfig {
     _500x500: { url: string };
+    expandedFooter?: { url: string };
+    rectangle?: { url: string };
+    relatedworks?: { url: string };
+    responsive?: { url: string };
     footer: { url: string };
     header: { url: string };
     logo: { url: string };

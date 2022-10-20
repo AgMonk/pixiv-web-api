@@ -26,19 +26,6 @@ export class Author {
         }
     }
 }
-
-export class Times {
-    createDate: Date | undefined;
-    uploadDate: Date | undefined;
-    updateDate: Date | undefined;
-
-    constructor(props: { hasOwnProperty?: (arg0: string) => any; id?: any; illustId?: any; description?: any; illustComment?: any; title?: any; illustTitle?: any; urls?: any; url?: any; tags?: { hasOwnProperty: (arg0: string) => any; tags: any; }; illustType?: any; bookmarkData?: any; xRestrict?: number; restrict?: number; createDate?: any; uploadDate?: any; updateDate?: any; }) {
-        this.createDate = props.createDate ? new Date(props.createDate) : undefined
-        this.uploadDate = props.uploadDate ? new Date(props.uploadDate) : undefined
-        this.updateDate = props.updateDate ? new Date(props.updateDate) : undefined
-    }
-}
-
 export class IllustCounts {
     bookmark: number | undefined
     comment: number | undefined

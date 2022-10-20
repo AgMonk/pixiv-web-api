@@ -1,4 +1,4 @@
-import {BookmarkData} from "./comom";
+import {BookmarkData} from "./commom";
 
 /**
  * 小说基础信息
@@ -6,7 +6,7 @@ import {BookmarkData} from "./comom";
 export interface NovelInfo {
     bookmarkCount: number
     bookmarkData: BookmarkData
-    createDate: Date
+    createDate: string
     description: string
     id: number
     profileImageUrl: string
@@ -15,7 +15,7 @@ export interface NovelInfo {
     tags: Array<string>
     textCount: number
     title: string
-    updateDate: Date
+    updateDate: string
     url: string
     useWordCount: boolean
     userId: number

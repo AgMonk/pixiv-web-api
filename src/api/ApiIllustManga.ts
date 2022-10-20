@@ -1,9 +1,9 @@
 import {AxiosInstance} from "axios";
-import {ResIllustMangaInfo} from "../types/response/ResIllustMangaInfo";
 import {ResSearchResult} from "../types/response/ResSearchResult";
 import {ResBookmarkData} from "../types/response/ResBookmarkData";
 import {ResUgoiraMeta} from "../types/response/ResUgoiraMeta";
 import {ResFollowLatestIllust} from "../types/response/ResFollowLatestIllust";
+import {IllustDetail} from "../interface/illust";
 
 
 export class ApiIllustManga {
@@ -14,9 +14,9 @@ export class ApiIllustManga {
         this.instance = instance;
     }
 
-    detail(pid: number): Promise<ResIllustMangaInfo> {
+    detail(pid: number): Promise<IllustDetail> {
         return this.instance.get("/ajax/illust/" + pid).then(res => {
-            return new ResIllustMangaInfo(res.data.body)
+            return res.data.body
         })
     }
 
@@ -24,9 +24,9 @@ export class ApiIllustManga {
         p: number;
         mode: "all" | "safe" | "r18";
         order: "date_d" | "date";
-        lang: string | undefined;
-        scd: string | undefined;
-        ecd: string | undefined;
+        lang?: string;
+        scd?: string;
+        ecd?: string;
     }): Promise<ResSearchResult> {
         return this.instance.get("/ajax/search/artworks/" + keywords, {params}).then(res => {
             return new ResSearchResult(res.data.body)
