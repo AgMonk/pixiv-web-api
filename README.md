@@ -12,7 +12,13 @@ npm install pixiv-web-api-for-browser
 
 ```js
 import {Api} from "pixiv-web-api-for-browser"
+//cookie设置一次，有效期一年
+Api.setCookie("PHPSESSID", "/pixiv-net/")
+```
 
+PHPSESSID从已登陆的cookie中获取，"/pixiv-net/" 为nginx反代到官网的路径
+
+```js
 
 let instance = axios.create({baseURL: "/pixiv-net/", timeout: 20000});
 let api = new Api(instance, token);
