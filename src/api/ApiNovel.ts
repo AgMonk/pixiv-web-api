@@ -18,27 +18,27 @@ export class ApiNovel {
         })
     }
 
-    //todo 搜索
+    // 搜索
     search(keywords: string, params: {
         p: number;
         order?: "date_d" | "date";
         mode: "all" | "safe" | "r18";
         s_mode?: "s_tag" | "s_tag_only" | "s_tag_full" | "s_tc";
-        lang: string | undefined;
+        lang?: string;
     }) {
         return this.instance.get(`/ajax/search/novels/` + keywords, {params}).then(res => {
             return res.data.body
         })
     }
 
-    //todo 详情
+    // 详情
     detail(nid: number, lang?: string) {
         return this.instance.get(`/ajax/novel/` + nid, {params: {lang}}).then(res => {
             return res.data.body
         })
     }
 
-    //todo 查询系列
+    // 查询系列
     series(seriesId: number, lang?: string) {
         return this.instance.get(`/ajax/novel/series/` + seriesId, {params: {lang}}).then(res => {
             return res.data.body
