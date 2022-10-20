@@ -9,8 +9,8 @@ export class ApiComment {
         this.token = token;
     }
 
-    //todo 查询作品评论（根）
-    illustsRoots(param: { illust_id: number; page: number; size: number; lang: string; }): Promise<any> {
+    // 查询作品评论（根）
+    illustsRoots(param: { illust_id: number; page: number; size: number; lang?: string; }): Promise<{ comments: Array<any>, hasNext: boolean }> {
         const {size, page, lang, illust_id} = param
         const params = {lang, illust_id, offset: (page - 1) * size, limit: size}
         return this.instance.get("/ajax/illusts/comments/roots", {params}).then(res => {
@@ -18,8 +18,8 @@ export class ApiComment {
         })
     }
 
-    //todo 查询作品回复（楼中楼）
-    illustsReplies(params: { comment_id: number; page: number; lang: string; }): Promise<any> {
+    // 查询作品回复（楼中楼）
+    illustsReplies(params: { comment_id: number; page: number; lang?: string; }): Promise<{ comments: Array<any>, hasNext: boolean }> {
         return this.instance.get("/ajax/illusts/comments/replies", {params}).then(res => {
             return res.data.body
         })
@@ -30,7 +30,14 @@ export class ApiComment {
         authorUserId: number;
         parentId?: number;
         stampId: number;
-    }) {
+    }): Promise<{
+        comment: string
+        comment_id: number
+        parent_id: number | undefined
+        stamp_id: number | undefined
+        user_id: number
+        user_name: string
+    }> {
         const {authorUserId, stampId, parentId, illustId,} = params
         return this.comment({authorUserId, stampId, parentId, illustId, type: "stamp"})
     }
@@ -40,9 +47,29 @@ export class ApiComment {
         authorUserId: number;
         parentId?: number;
         comment: string;
-    }) {
+    }): Promise<{
+        comment: string
+        comment_id: number
+        parent_id: number | undefined
+        stamp_id: number | undefined
+        user_id: number
+        user_name: string
+    }> {
         const {authorUserId, comment, parentId, illustId,} = params
-        return this.comment({authorUserId, comment, parentId, illustId, type: "stamp"})
+        return this.comment({authorUserId, comment, parentId, illustId, type: "comment"})
+    }
+
+    //删除评论
+    delComment(illustId: number, commentId: number): Promise<any> {
+        let formData = new FormData();
+        formData.append("i_id", "" + illustId)
+        formData.append("del_id", "" + commentId)
+        return this.instance.post("/rpc_delete_comment.php", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                'x-csrf-token': this.token,
+            }
+        })
     }
 
     //todo 发布评论
@@ -53,7 +80,14 @@ export class ApiComment {
         parentId?: number | undefined;
         comment?: string | undefined;
         stampId?: number | undefined;
-    }): Promise<any> {
+    }): Promise<{
+        comment: string
+        comment_id: number
+        parent_id: number | undefined
+        stamp_id: number | undefined
+        user_id: number
+        user_name: string
+    }> {
         const {authorUserId, type, comment, stampId, parentId, illustId,} = params
         let formData = new FormData();
         formData.append("illust_id", "" + illustId)
@@ -66,26 +100,15 @@ export class ApiComment {
             formData.append("comment", comment)
         }
         if (type === "stamp") {
-            formData.append("stampId", "" + stampId)
+            formData.append("stamp_id", "" + stampId)
         }
         return this.instance.post("/rpc/post_comment.php", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
                 'x-csrf-token': this.token,
             }
-        })
-    }
-
-    //todo 删除评论
-    delComment(illustId: number, commentId: number): Promise<any> {
-        let formData = new FormData();
-        formData.append("i_id", "" + illustId)
-        formData.append("del_id", "" + commentId)
-        return this.instance.post("/rpc_delete_comment.php", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-                'x-csrf-token': this.token,
-            }
+        }).then(res => {
+            return res.data.body
         })
     }
 }
