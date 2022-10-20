@@ -5,6 +5,8 @@ import {ApiNovel} from "./ApiNovel";
 import {PixivException} from "../types/PixivException";
 import {ApiFollow} from "./ApiFollow";
 import {ApiUser} from "./ApiUser";
+import {ApiRanking} from "./ApiRanking";
+import {ApiComment} from "./ApiComment";
 
 export class Api {
     instance: AxiosInstance
@@ -13,9 +15,11 @@ export class Api {
     illustManga: ApiIllustManga
     novel: ApiNovel;
     user: ApiUser;
+    ranking: ApiRanking;
 
     bookmark: ApiBookmark | undefined
     follow: ApiFollow | undefined;
+    comments: ApiComment | undefined;
 
     constructor(instance: AxiosInstance, token: string) {
         this.instance = instance;
@@ -41,6 +45,7 @@ export class Api {
         this.illustManga = new ApiIllustManga(instance);
         this.novel = new ApiNovel(instance);
         this.user = new ApiUser(instance);
+        this.ranking = new ApiRanking(instance);
 
         //如果token为空 则自动请求token
         if (token === '' || token === undefined) {
@@ -66,5 +71,6 @@ export class Api {
     initWithToken(token: string){
         this.bookmark = new ApiBookmark(this.instance, token);
         this.follow = new ApiFollow(this.instance, token)
+        this.comments = new ApiComment(this.instance, token)
     }
 }
