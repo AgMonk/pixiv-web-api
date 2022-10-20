@@ -3,6 +3,7 @@ import {UserBookmarksParam} from "../interface/param";
 import {CommissionRequestSent, ProfileAll, Profiles, UserBookmarks, UserInfo} from "../interface/user";
 import {NovelInfo} from "../interface/novel";
 import {IllustInfo} from "../interface/illust";
+import {BookmarkTags} from "../interface/bookmark";
 
 export class ApiUser {
     private instance: AxiosInstance
@@ -76,16 +77,16 @@ export class ApiUser {
         })
     }
 
-    //todo 查询用户的收藏的插画/漫画中使用的标签
-    illustsBookmarkTags(uid: number, lang?: string) {
+    // 查询用户的收藏的插画/漫画中使用的标签
+    illustsBookmarkTags(uid: number, lang?: string): Promise<BookmarkTags> {
         const params = {lang}
         return this.instance.get(`/ajax/user/${uid}/illusts/bookmark/tags`, {params}).then(res => {
             return res.data.body
         })
     }
 
-    //todo 查询用户的收藏小说中使用的标签
-    novelsBookmarkTags(uid: number, lang?: string) {
+    // 查询用户的收藏小说中使用的标签
+    novelsBookmarkTags(uid: number, lang?: string): Promise<BookmarkTags> {
         const params = {lang}
         return this.instance.get(`/ajax/user/${uid}/novels/bookmark/tags`, {params}).then(res => {
             return res.data.body
