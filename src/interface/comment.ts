@@ -1,3 +1,7 @@
+import {IllustInfo} from "./illust";
+import {Thumbnails} from "./commom";
+import {ZoneConfig} from "./user";
+
 export interface Comment {
     comment: string
     commentDate: string
@@ -8,7 +12,7 @@ export interface Comment {
     id: number
     img: string
     isDeletedUser: boolean
-    stampId?: number
+    stampId: number | undefined
     userId: number
     userName: string
 }
@@ -25,4 +29,18 @@ export interface ResComment {
     stamp_id: number | undefined
     user_id: number
     user_name: string
+}
+
+export interface Popular<T> {
+    permanent: Array<IllustInfo>
+    recent: Array<IllustInfo>
+}
+
+export interface FollowLatest {
+    page: {
+        ids: Array<number>
+        isLastPage: boolean
+    }
+    thumbnails: Thumbnails
+    zoneConfig: ZoneConfig
 }

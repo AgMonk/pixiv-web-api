@@ -1,6 +1,8 @@
 /**
  * 收藏数据
  */
+import {IllustInfo} from "./illust";
+import {NovelInfo} from "./novel";
 
 export interface BookmarkData {
     id: number,
@@ -8,25 +10,25 @@ export interface BookmarkData {
 }
 
 export interface Thumbnails {
-    illust: Array<any>
-    novel: Array<any>
+    illust: Array<IllustInfo>
+    novel: Array<NovelInfo>
     novelDraft: Array<any>
     novelSeries: Array<any>
 }
 
 export interface Translation {
-    en?: string
-    zh?: string
-    zh_tw?: string
-    ko?: string
-    jp?: string
+    en: string | undefined
+    zh: string | undefined
+    zh_tw: string | undefined
+    ko: string | undefined
+    jp: string | undefined
 }
 
 export interface Tag {
     deletable: boolean
     locked: boolean
     tag: string
-    translation: Translation
+    translation: Translation | undefined
     userId: number
     userName: string
 }

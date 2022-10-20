@@ -1,9 +1,6 @@
 import {AxiosInstance} from "axios";
-import {ResSearchResult} from "../types/response/ResSearchResult";
-import {ResBookmarkData} from "../types/response/ResBookmarkData";
-import {ResUgoiraMeta} from "../types/response/ResUgoiraMeta";
-import {ResFollowLatestIllust} from "../types/response/ResFollowLatestIllust";
-import {IllustDetail} from "../interface/illust";
+import {IllustDetail, IllustSearchResult, ResBookmarkData, UgoiraMeta} from "../interface/illust";
+import {FollowLatest} from "../interface/comment";
 
 
 export class ApiIllustManga {
@@ -27,31 +24,27 @@ export class ApiIllustManga {
         lang?: string;
         scd?: string;
         ecd?: string;
-    }): Promise<ResSearchResult> {
+    }): Promise<IllustSearchResult> {
         return this.instance.get("/ajax/search/artworks/" + keywords, {params}).then(res => {
-            return new ResSearchResult(res.data.body)
+            return res.data.body
         })
     }
 
     bookmarkData(pid: number): Promise<ResBookmarkData> {
         return this.instance.get(`/ajax/illust/${pid}/bookmarkData`).then(res => {
-            return new ResBookmarkData(res.data.body)
+            return res.data.body
         })
     }
 
-    ugoiraMeta(pid: number): Promise<ResUgoiraMeta> {
+    ugoiraMeta(pid: number): Promise<UgoiraMeta> {
         return this.instance.get(`/ajax/illust/${pid}/ugoira_meta`).then(res => {
-            return new ResUgoiraMeta(res.data.body)
+            return res.data.body
         })
     }
 
-    followLatest(params: {
-        p: number;
-        mod: "all" | "r18";
-        lang: string | undefined;
-    }) {
-        return this.instance.get(`/ajax/follow_latest/illust`, {params}).then(res => {
-            return new ResFollowLatestIllust(res.data.body)
+    followLatest(p: number, mode: "all" | "r18", lang?: string): Promise<FollowLatest> {
+        return this.instance.get(`/ajax/follow_latest/illust`, {params: {p, mode, lang}}).then(res => {
+            return res.data.body
         })
     }
 

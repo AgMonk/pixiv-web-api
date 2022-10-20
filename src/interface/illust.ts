@@ -1,12 +1,13 @@
 import {BookmarkData, Tag} from "./commom";
 import {ZoneConfig} from "./user";
+import {Popular} from "./comment";
 
 /**
  * 绘画基础信息
  */
 export interface IllustInfo {
     alt: string
-    bookmarkData: BookmarkData
+    bookmarkData: BookmarkData | undefined
     createDate: string
     description: string
     height: number
@@ -71,5 +72,38 @@ export interface IllustDetail {
     width: number
     xRestrict: 0 | 1
     zoneConfig: ZoneConfig
+}
+
+/**
+ * 搜索结果
+ */
+export interface IllustSearchResult {
+    illustManga: {
+        data: Array<IllustInfo>
+        total: number
+    }
+    popular: Popular<IllustInfo>
+    relatedTags: Array<string>
+    tagTranslation: object
+    zoneConfig: ZoneConfig
+}
+
+export interface ResBookmarkData {
+    bookmarkData: BookmarkData | undefined;
+    id: number;
+    isBookmarkable: boolean
+}
+
+export interface UgoiraMeta {
+    frames: Array<Frame>;
+    mimeType: string;
+    originalSrc: string;
+    src: string;
+
+}
+
+export interface Frame {
+    delay: number;
+    file: string;
 }
 

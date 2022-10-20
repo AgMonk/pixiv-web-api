@@ -63,9 +63,9 @@ export interface CommissionRequestSent {
 export interface ZoneConfig {
     _500x500: { url: string };
     expandedFooter?: { url: string };
-    rectangle?: { url: string };
-    relatedworks?: { url: string };
-    responsive?: { url: string };
+    rectangle: { url: string } | undefined;
+    relatedworks: { url: string } | undefined;
+    responsive: { url: string } | undefined;
     footer: { url: string };
     header: { url: string };
     logo: { url: string };
