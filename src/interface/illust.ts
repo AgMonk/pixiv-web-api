@@ -1,4 +1,4 @@
-import {BookmarkData, Tag} from "./commom";
+import {BookmarkData, Tag, Thumbnails} from "./commom";
 import {ZoneConfig} from "./user";
 import {Popular} from "./comment";
 
@@ -107,3 +107,13 @@ export interface Frame {
     file: string;
 }
 
+export interface DiscoveryBody {
+    tagTranslation: object
+    thumbnails: Thumbnails
+    recommendedIllusts: Array<{
+        illustId: string
+        recommendMethods: Array<string>
+        recommendScore: number
+        recommendSeedIllustIds: Array<string>
+    }>
+}

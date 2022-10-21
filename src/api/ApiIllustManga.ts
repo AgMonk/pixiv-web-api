@@ -1,5 +1,5 @@
 import {AxiosInstance} from "axios";
-import {IllustDetail, IllustSearchResult, ResBookmarkData, UgoiraMeta} from "../interface/illust";
+import {DiscoveryBody, IllustDetail, IllustSearchResult, ResBookmarkData, UgoiraMeta} from "../interface/illust";
 import {FollowLatest} from "../interface/comment";
 
 
@@ -44,6 +44,12 @@ export class ApiIllustManga {
 
     followLatest(p: number, mode: "all" | "r18", lang?: string): Promise<FollowLatest> {
         return this.instance.get(`/ajax/follow_latest/illust`, {params: {p, mode, lang}}).then(res => {
+            return res.data.body
+        })
+    }
+
+    discovery(limit: number, mode: "all" | "safe" | "r18", sampleIllustId?: number, lang?: string): Promise<DiscoveryBody> {
+        return this.instance.get(`/ajax/discovery/artworks`, {params: {limit, mode, lang, sampleIllustId}}).then(res => {
             return res.data.body
         })
     }
