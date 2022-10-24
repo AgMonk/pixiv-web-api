@@ -1,7 +1,7 @@
 //tsconfig.json配置如下：
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
     "declaration": true,
     "outDir": "./dist",

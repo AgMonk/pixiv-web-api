@@ -1,6 +1,6 @@
 import {AxiosInstance} from "axios";
 import {UserBookmarksParam} from "../interface/param";
-import {CommissionRequestSent, ProfileAll, Profiles, UserBookmarks, UserInfo} from "../interface/user";
+import {CommissionRequestSent, ProfileAll, Profiles, UserBookmarks, UserInfo, UserRecommend} from "../interface/user";
 import {NovelInfo} from "../interface/novel";
 import {IllustInfo} from "../interface/illust";
 import {BookmarkTags} from "../interface/bookmark";
@@ -92,4 +92,13 @@ export class ApiUser {
             return res.data.body
         })
     }
+
+    //推荐用户
+    recommend(uid: number, params: { lang?: string, userNum: number, workNum: number, isR18: Boolean }): Promise<UserRecommend> {
+        return this.instance.get(`/ajax/user/${uid}/recommends`, {params}).then(res => {
+            return res.data.body
+        })
+    }
+
+
 }

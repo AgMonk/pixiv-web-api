@@ -78,3 +78,13 @@ export interface UserBookmarks<T> {
     works: Array<T>
     zoneConfig: ZoneConfig;
 }
+
+export interface UserRecommend {
+    thumbnails: Thumbnails
+    users: Array<UserInfo>
+    recommendUsers: Array<{
+        userId: string
+        illustIds: string[]
+        novelIds: string[]
+    }>
+}
