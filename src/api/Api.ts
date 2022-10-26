@@ -48,7 +48,6 @@ export class Api {
         this.ranking = new ApiRanking(instance);
 
         if (token) {
-            this.token = token
             this.initWithToken(token)
         }
     }
@@ -80,6 +79,7 @@ export class Api {
     }
 
     initWithToken(token: string) {
+        this.token = token
         this.bookmark = new ApiBookmark(this.instance, token);
         this.follow = new ApiFollow(this.instance, token)
         this.comments = new ApiComment(this.instance, token)

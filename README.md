@@ -29,8 +29,9 @@ api.illustManga.detail(11111).then(res => {
 ```
 
 instance为axios对象，可以自行配置参数。
-token参数可以不传，此时Api会自行通过请求获取API，但是需要时间。可以通过 `isTokenReady` 方法获知token是否获取成功了，或者通过`fetchToken`方法手动获取token。`POST`请求必须使用token
-。token与cookie为一一配对，因此建议在第一次获取之后就保存起来多次使用。
+token与cookie为一一配对，因此建议在第一次获取之后就保存起来多次使用。
+token参数可以不传，但相应的使用token的方法无法使用(`POST`请求必须使用token)
+可以通过`api.fetchToken`方法手动获取token。
 
 各请求方法放在不同的字段中
 
