@@ -59,6 +59,13 @@ export class Api {
         document.cookie = `PHPSESSID=${phpSessionId};path=${path};expires=${date.toUTCString()}`
     }
 
+    static clearCookie(path: string) {
+        let day = 24 * 60 * 60 * 1000;
+        let date = new Date();
+        date.setTime(date.getTime() + -1 * day);
+        document.cookie = `PHPSESSID=;path=${path};expires=${date.toUTCString()}`
+    }
+
     isTokenReady(): boolean {
         return this.token !== undefined;
     }
