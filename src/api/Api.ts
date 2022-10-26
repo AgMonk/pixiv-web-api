@@ -68,14 +68,15 @@ export class Api {
     }
 
     fetchToken(): Promise<string | undefined> {
-        let pattern = /pixiv.context.token = "(.+?)";/
+        let pattern = /id="meta-global-data" content='(.+?)'>/
         return this.instance.get("/setting_user.php").then(res => {
             let matcher = pattern.exec(res.data);
             if (matcher) {
-                this.token = matcher[1]
+                let data = JSON.parse(matcher[1])
+                this.token = data.token
                 console.log("获取到token:" + this.token)
-                this.initWithToken(this.token)
-                return this.token
+                this.initWithToken(<string>this.token)
+                return data
             }
             return undefined
         })
