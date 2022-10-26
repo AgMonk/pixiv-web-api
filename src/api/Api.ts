@@ -47,10 +47,7 @@ export class Api {
         this.user = new ApiUser(instance);
         this.ranking = new ApiRanking(instance);
 
-        //如果token为空 则自动请求token
-        if (token === '' || token === undefined) {
-            this.fetchToken()
-        } else {
+        if (token) {
             this.token = token
             this.initWithToken(token)
         }
