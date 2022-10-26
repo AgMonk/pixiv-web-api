@@ -67,7 +67,7 @@ export class Api {
         return this.token !== undefined;
     }
 
-    fetchToken() {
+    fetchToken(): Promise<string | undefined> {
         let pattern = /pixiv.context.token = "(.+?)";/
         return this.instance.get("/setting_user.php").then(res => {
             let matcher = pattern.exec(res.data);
@@ -75,7 +75,9 @@ export class Api {
                 this.token = matcher[1]
                 console.log("获取到token:" + this.token)
                 this.initWithToken(this.token)
+                return this.token
             }
+            return undefined
         })
     }
 

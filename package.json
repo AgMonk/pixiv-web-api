@@ -1,17 +1,21 @@
 {
   "name": "pixiv-web-api-for-browser",
-  "version": "1.0.46",
+  "version": "1.0.50",
   "description": "pixiv-web-api",
-  "main": "index.js",
-  "types": "index.d.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.js",
   "scripts": {
-    "pub": "echo f|xcopy package.json dist\\package.json /Y && cd dist && npm publish --access public && cd.. && rmdir dist /s /q",
+    "pub": "npm publish --access public && rmdir dist /s /q",
     "ver": "git add . && git commit -m \"publish to npm\" && npm version patch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "pixiv",
     "api"
+  ],
+  "files": [
+    "dist",
+    "README.md"
   ],
   "author": "gin",
   "license": "ISC",
