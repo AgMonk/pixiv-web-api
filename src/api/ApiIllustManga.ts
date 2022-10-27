@@ -1,6 +1,6 @@
 import {AxiosInstance} from "axios";
 import {DiscoveryBody, IllustDetail, IllustSearchResult, ResBookmarkData, UgoiraMeta} from "../interface/illust";
-import {FollowLatest} from "../interface/comment";
+import {FollowLatest} from "../interface/commom";
 
 
 export class ApiIllustManga {

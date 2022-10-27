@@ -25,7 +25,7 @@ export class Api {
         this.instance = instance;
 
         instance.interceptors.response.use(res => {
-            console.log(`${new Date().toLocaleString()} Request Success: `, res)
+            console.debug(`${new Date().toLocaleString()} Request Success: `, res)
             return res;
         }, error => {
             let response = <AxiosResponse>error.response;
@@ -77,7 +77,7 @@ export class Api {
             if (matcher) {
                 let data = JSON.parse(matcher[1])
                 this.token = data.token
-                console.log("获取到token:" + this.token)
+                console.debug("获取到token:" + this.token)
                 this.initWithToken(<string>this.token)
                 return data
             }

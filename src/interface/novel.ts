@@ -1,5 +1,4 @@
-import {BookmarkData, Tag} from "./commom";
-import {Popular} from "./comment";
+import {BookmarkData, Popular, Tag} from "./commom";
 import {ZoneConfig} from "./user";
 
 /**

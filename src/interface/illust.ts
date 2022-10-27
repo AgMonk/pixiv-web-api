@@ -1,6 +1,5 @@
-import {BookmarkData, Tag, Thumbnails} from "./commom";
+import {BookmarkData, Popular, Tag, Thumbnails} from "./commom";
 import {ZoneConfig} from "./user";
-import {Popular} from "./comment";
 
 /**
  * 绘画基础信息
@@ -18,8 +17,10 @@ export interface IllustInfo {
     restrict: 0 | 1
     tags: Array<string>
     title: string
+    titleCaptionTranslation: object
     updateDate: string
     url: string
+    urls: object
     userId: number
     userName: string
     width: number

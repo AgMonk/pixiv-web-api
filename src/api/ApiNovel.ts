@@ -1,6 +1,6 @@
 import {AxiosInstance} from "axios";
-import {FollowLatest} from "../interface/comment";
 import {NovelDetail, NovelSearchResult, NovelSeries} from "../interface/novel";
+import {FollowLatest} from "../interface/commom";
 
 export class ApiNovel {
     private instance: AxiosInstance;
