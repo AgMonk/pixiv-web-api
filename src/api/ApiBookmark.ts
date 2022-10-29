@@ -79,5 +79,13 @@ export class ApiBookmark {
             }
         })
     }
+
+    like(pid: number, lang?: string): Promise<any> {
+        return this.instance.post(`/ajax/illusts/like`, {params: {illust_id: pid}}, {
+            headers: {
+                'x-csrf-token': this.token,
+            }
+        })
+    }
 }
 
