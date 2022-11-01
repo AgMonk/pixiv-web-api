@@ -18,7 +18,7 @@ export interface LangInfo {
 }
 
 export interface PixivTagInfo {
-    authorId: number
+    authorId: string
     isLocked: boolean
     tags: Array<Tag>
     writable: boolean
