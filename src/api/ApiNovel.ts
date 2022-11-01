@@ -21,7 +21,12 @@ export class ApiNovel {
         order?: "date_d" | "date";
         mode: "all" | "safe" | "r18";
         s_mode?: "s_tag" | "s_tag_only" | "s_tag_full" | "s_tc";
+        gs: 0 | 1;
         lang?: string;
+        scd?: string;
+        ecd?: string;
+        tgt?: number;
+        tlt?: number;
     }): Promise<NovelSearchResult> {
         return this.instance.get(`/ajax/search/novels/` + keywords, {params}).then(res => {
             return res.data.body
