@@ -1,5 +1,5 @@
 import {AxiosInstance} from "axios";
-import {DiscoveryBody, IllustDetail, IllustSearchResult, ResBookmarkData, UgoiraMeta} from "../interface/illust";
+import {DiscoveryBody, IllustDetail, IllustInfo, IllustRecommendInitBody, IllustSearchResult, ResBookmarkData, UgoiraMeta} from "../interface/illust";
 import {FollowLatest} from "../interface/commom";
 
 
@@ -51,6 +51,22 @@ export class ApiIllustManga {
     discovery(limit: number, mode: "all" | "safe" | "r18", sampleIllustId?: number, lang?: string): Promise<DiscoveryBody> {
         return this.instance.get(`/ajax/discovery/artworks`, {params: {limit, mode, lang, sampleIllustId}}).then(res => {
             return res.data.body
+        })
+    }
+
+    //查询推荐作品
+    recommendInit(pid: number, limit: number, lang?: string): Promise<IllustRecommendInitBody> {
+        return this.instance.get(`/ajax/illust/${pid}/recommend/init`, {params: {limit, lang}}).then(res => {
+            return res.data.body
+        })
+    }
+
+
+//查询推荐作品2
+    recommendIllusts(ids: number[], lang?: string): Promise<IllustInfo[]> {
+        const params = {lang, illust_ids: ids,}
+        return this.instance.get(`/ajax/illust/recommend/illusts`, {params}).then(res => {
+            return res.data.body.illusts
         })
     }
 

@@ -1,5 +1,6 @@
-import {BookmarkData, Popular, Tag, Thumbnails} from "./commom";
+import {BookmarkData, Popular, Thumbnails} from "./commom";
 import {ZoneConfig} from "./user";
+import {PixivTagInfo} from "./tag";
 
 /**
  * 绘画基础信息
@@ -50,12 +51,7 @@ export interface IllustDetail {
     pageCount: number
     request: object
     restrict: 0 | 1
-    tags: {
-        authorId: number
-        isLocked: boolean
-        tags: Array<Tag>
-        writable: boolean
-    }
+    tags: PixivTagInfo
     title: string
     uploadDate: string
     urls: {
@@ -117,4 +113,10 @@ export interface DiscoveryBody {
         recommendScore: number
         recommendSeedIllustIds: Array<string>
     }>
+}
+
+export interface IllustRecommendInitBody {
+    illusts: IllustInfo[];
+    nextIds: number[];
+    details: object;
 }

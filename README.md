@@ -42,5 +42,6 @@ token参数可以不传，但相应的使用token的方法无法使用(`POST`请
 - bookmark: 收藏
 - follow: 关注
 - comments: 评论区
+- tag: 标签相关
 
 各方法含义可参照：[这里](https://github.com/AgMonk/pixiv-utils/blob/master/README.md)

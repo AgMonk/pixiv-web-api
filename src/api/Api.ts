@@ -7,6 +7,7 @@ import {ApiFollow} from "./ApiFollow";
 import {ApiUser} from "./ApiUser";
 import {ApiRanking} from "./ApiRanking";
 import {ApiComment} from "./ApiComment";
+import {ApiTag} from "./ApiTag";
 
 export class Api {
     instance: AxiosInstance
@@ -20,6 +21,7 @@ export class Api {
     bookmark: ApiBookmark | undefined
     follow: ApiFollow | undefined;
     comments: ApiComment | undefined;
+    tag: ApiTag | undefined;
 
     constructor(instance: AxiosInstance, token?: string) {
         this.instance = instance;
@@ -90,5 +92,6 @@ export class Api {
         this.bookmark = new ApiBookmark(this.instance, token);
         this.follow = new ApiFollow(this.instance, token)
         this.comments = new ApiComment(this.instance, token)
+        this.tag = new ApiTag(this.instance, token)
     }
 }
