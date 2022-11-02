@@ -1,6 +1,7 @@
 import {AxiosInstance} from "axios";
 import {NovelDetail, NovelSearchResult, NovelSeries} from "../interface/novel";
 import {FollowLatest} from "../interface/commom";
+import {DiscoveryBody} from "../interface/illust";
 
 export class ApiNovel {
     private instance: AxiosInstance;
@@ -29,6 +30,12 @@ export class ApiNovel {
         tlt?: number;
     }): Promise<NovelSearchResult> {
         return this.instance.get(`/ajax/search/novels/` + keywords, {params}).then(res => {
+            return res.data.body
+        })
+    }
+
+    discovery(limit: number, mode: "all" | "safe" | "r18", sampleNovelId?: number, lang?: string): Promise<DiscoveryBody> {
+        return this.instance.get(`/ajax/discovery/novels`, {params: {limit, mode, lang, sampleNovelId}}).then(res => {
             return res.data.body
         })
     }
