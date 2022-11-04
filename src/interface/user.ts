@@ -15,7 +15,16 @@ export interface ProfileAll {
     mangaSeries: Array<any>;
     novelSeries: Array<any>;
     pickup: Array<any>;
-    request: object;
+    request: Request;
+}
+
+export interface Request {
+    showRequestTab: boolean,
+    showRequestSentTab: boolean,
+    postWorks: {
+        artworks: string[],
+        novels: string[],
+    }
 }
 
 /**
