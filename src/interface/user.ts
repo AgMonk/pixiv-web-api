@@ -10,6 +10,7 @@ export interface ProfileAll {
     }
     externalSiteWorksStatus: object;
     illusts: object;
+    novels: object;
     manga: object;
     mangaSeries: Array<any>;
     novelSeries: Array<any>;
