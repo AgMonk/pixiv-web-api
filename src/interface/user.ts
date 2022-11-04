@@ -31,9 +31,15 @@ export interface UserInfo {
     imageBig: string
     name: string
     region: object
+    social: Social
     userId: number
     webpage: any
     workspace: object
+}
+
+export interface Social {
+    facebook: { url: string },
+    twitter: { url: string },
 }
 
 /**
