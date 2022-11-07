@@ -2,12 +2,11 @@ import {AxiosInstance} from "axios";
 import {CommentBody, ResComment} from "../interface/comment";
 
 export class ApiComment {
-    readonly token: string
     private instance: AxiosInstance
 
-    constructor(instance: AxiosInstance, token: string) {
+
+    constructor(instance: AxiosInstance) {
         this.instance = instance;
-        this.token = token;
     }
 
     // 查询作品评论（根）
@@ -44,7 +43,6 @@ export class ApiComment {
         return this.instance.post("/rpc_delete_comment.php", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                'x-csrf-token': this.token,
             }
         })
     }
@@ -75,7 +73,6 @@ export class ApiComment {
         return this.instance.post("/rpc/post_comment.php", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                'x-csrf-token': this.token,
             }
         }).then(res => {
             return res.data.body

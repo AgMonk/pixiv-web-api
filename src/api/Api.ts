@@ -1,4 +1,4 @@
-import {AxiosInstance, AxiosResponse} from "axios";
+import axios, {AxiosInstance, AxiosResponse} from "axios";
 import {ApiIllustManga} from "./ApiIllustManga";
 import {ApiBookmark} from "./ApiBookmark";
 import {ApiNovel} from "./ApiNovel";
@@ -8,6 +8,7 @@ import {ApiUser} from "./ApiUser";
 import {ApiRanking} from "./ApiRanking";
 import {ApiComment} from "./ApiComment";
 import {ApiTag} from "./ApiTag";
+import {CancelerCache} from "../cache/CancelerCache";
 
 export class Api {
     instance: AxiosInstance
@@ -26,7 +27,47 @@ export class Api {
     constructor(instance: AxiosInstance, token?: string) {
         this.instance = instance;
 
+
+        //请求拦截器
+        instance.interceptors.request.use(config => {
+            const headers = config.headers;
+            if ('post' === config.method) {
+                //post请求统一添加token
+                headers && (headers['x-csrf-token'] = this.token)
+            }
+            const url = config.url;
+
+            //搜索请求
+            if (url && url.startsWith("/ajax/search/artworks/")) {
+                const key = "search";
+                CancelerCache.cancel(key)
+                config.cancelToken = new axios.CancelToken(function executor(c) {
+                    CancelerCache.saveCanceler(key, c);
+                });
+                // @ts-ignore
+                config.cancelKey = key
+            }
+            //详情请求
+            if (url && /^\/ajax\/illust\/\d+$/.exec(url)) {
+                const key = "detail"
+                CancelerCache.cancel(key)
+                config.cancelToken = new axios.CancelToken(function executor(c) {
+                    CancelerCache.saveCanceler(key, c);
+                });
+                // @ts-ignore
+                config.cancelKey = key
+            }
+
+
+            return config;
+        }, error => Promise.reject(error));
+
+        //响应拦截器
         instance.interceptors.response.use(res => {
+            const config = res.config;
+            // @ts-ignore
+            CancelerCache.delete(config.cancelKey)
+
             console.debug(`${new Date().toLocaleString()} Request Success: `, res)
             return res;
         }, error => {
@@ -34,6 +75,8 @@ export class Api {
             if (response) {
                 const {data, status, config} = response
                 const {url} = config
+                // @ts-ignore
+                CancelerCache.delete(config.cancelKey)
                 if (status >= 500) {
                     throw new PixivException(status, url, "Net Error", config.data)
                 }
@@ -48,10 +91,10 @@ export class Api {
         this.novel = new ApiNovel(instance);
         this.user = new ApiUser(instance);
         this.ranking = new ApiRanking(instance);
-
-        if (token) {
-            this.initWithToken(token)
-        }
+        this.bookmark = new ApiBookmark(instance);
+        this.follow = new ApiFollow(instance)
+        this.comments = new ApiComment(instance)
+        this.tag = new ApiTag(instance)
     }
 
     static setCookie(phpSessionId: string, path: string) {
@@ -80,18 +123,10 @@ export class Api {
                 let data = JSON.parse(matcher[1])
                 this.token = data.token
                 console.debug("获取到token:" + this.token)
-                this.initWithToken(<string>this.token)
                 return data
             }
             return undefined
         })
     }
 
-    initWithToken(token: string) {
-        this.token = token
-        this.bookmark = new ApiBookmark(this.instance, token);
-        this.follow = new ApiFollow(this.instance, token)
-        this.comments = new ApiComment(this.instance, token)
-        this.tag = new ApiTag(this.instance, token)
-    }
 }

@@ -1,12 +1,11 @@
 import {AxiosInstance} from "axios";
 
 export class ApiFollow {
-    readonly token: string
     private instance: AxiosInstance
 
-    constructor(instance: AxiosInstance, token: string) {
+
+    constructor(instance: AxiosInstance) {
         this.instance = instance;
-        this.token = token;
     }
 
     //关注
@@ -21,7 +20,6 @@ export class ApiFollow {
         return this.instance.post("/bookmark_add.php", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                'x-csrf-token': this.token,
             }
         })
     }
@@ -35,7 +33,6 @@ export class ApiFollow {
         return this.instance.post("/rpc_group_setting.php", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                'x-csrf-token': this.token,
             }
         }).then(res => {
             return res.data

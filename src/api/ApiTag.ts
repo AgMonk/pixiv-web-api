@@ -2,12 +2,11 @@ import {AxiosInstance} from "axios";
 import {PixivTagInfo, TagInfo} from "../interface/tag";
 
 export class ApiTag {
-    readonly token: string
     private instance: AxiosInstance
 
-    constructor(instance: AxiosInstance, token: string) {
+
+    constructor(instance: AxiosInstance) {
         this.instance = instance;
-        this.token = token;
     }
 
     info(tag: string, lang?: string): Promise<TagInfo> {
@@ -23,11 +22,7 @@ export class ApiTag {
     }
 
     illustAdd(pid: number, tag: string): Promise<PixivTagInfo> {
-        return this.instance.post(`/ajax/tags/illust/${pid}/add`, {tag}, {
-            headers: {
-                'x-csrf-token': this.token,
-            }
-        }).then(res => {
+        return this.instance.post(`/ajax/tags/illust/${pid}/add`, {tag}).then(res => {
             return res.data.body
         })
     }

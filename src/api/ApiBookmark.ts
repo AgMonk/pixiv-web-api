@@ -2,13 +2,11 @@ import {AxiosInstance} from "axios";
 
 
 export class ApiBookmark {
-    readonly token: string
     private instance: AxiosInstance
 
 
-    constructor(instance: AxiosInstance, token: string) {
+    constructor(instance: AxiosInstance) {
         this.instance = instance;
-        this.token = token;
     }
 
     addIllust(param: {
@@ -17,11 +15,7 @@ export class ApiBookmark {
         comment: string;
         tags: Array<string>;
     }): Promise<number> {
-        return this.instance.post("/ajax/illusts/bookmarks/add", param, {
-            headers: {
-                'x-csrf-token': this.token,
-            }
-        }).then(res => {
+        return this.instance.post("/ajax/illusts/bookmarks/add", param,).then(res => {
             return res.data.body.last_bookmark_id
         })
     }
@@ -32,17 +26,12 @@ export class ApiBookmark {
         return this.instance.post("/ajax/illusts/bookmarks/delete", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                'x-csrf-token': this.token,
             }
         })
     }
 
     delIllusts(bookmarkIds: Array<number>): Promise<any> {
-        return this.instance.post("/ajax/illusts/bookmarks/remove", {bookmarkIds}, {
-            headers: {
-                'x-csrf-token': this.token,
-            }
-        })
+        return this.instance.post("/ajax/illusts/bookmarks/remove", {bookmarkIds},)
     }
 
     addNovel(param: {
@@ -51,11 +40,7 @@ export class ApiBookmark {
         comment: string;
         tags: Array<string>;
     }): Promise<number> {
-        return this.instance.post("/ajax/novels/bookmarks/add", param, {
-            headers: {
-                'x-csrf-token': this.token,
-            }
-        }).then(res => {
+        return this.instance.post("/ajax/novels/bookmarks/add", param,).then(res => {
             return res.data.body
         })
     }
@@ -67,25 +52,16 @@ export class ApiBookmark {
         return this.instance.post("/ajax/novels/bookmarks/delete", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
-                'x-csrf-token': this.token,
             }
         })
     }
 
     delNovels(bookmarkIds: Array<number>): Promise<any> {
-        return this.instance.post("/ajax/novels/bookmarks/remove", {bookmarkIds}, {
-            headers: {
-                'x-csrf-token': this.token,
-            }
-        })
+        return this.instance.post("/ajax/novels/bookmarks/remove", {bookmarkIds},)
     }
 
     like(pid: number, lang?: string): Promise<any> {
-        return this.instance.post(`/ajax/illusts/like`, {illust_id: pid}, {
-            headers: {
-                'x-csrf-token': this.token,
-            }
-        })
+        return this.instance.post(`/ajax/illusts/like`, {illust_id: pid},)
     }
 }
 
