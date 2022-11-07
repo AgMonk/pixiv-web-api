@@ -18,11 +18,10 @@ export class Api {
     novel: ApiNovel;
     user: ApiUser;
     ranking: ApiRanking;
-
-    bookmark: ApiBookmark | undefined
-    follow: ApiFollow | undefined;
-    comments: ApiComment | undefined;
-    tag: ApiTag | undefined;
+    bookmark: ApiBookmark
+    follow: ApiFollow
+    comments: ApiComment
+    tag: ApiTag
 
     constructor(instance: AxiosInstance, token?: string) {
         this.instance = instance;

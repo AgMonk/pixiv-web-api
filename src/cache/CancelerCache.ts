@@ -49,9 +49,9 @@ export class CancelerCache {
 }
 
 const patterns: Array<{ pattern: RegExp, getKey: string | ((config: AxiosRequestConfig, pattern: RegExp) => string) }> = [
-    //详情请求
+    //绘画详情请求
     {pattern: /^\/ajax\/illust\/\d+$/, getKey: 'detail'},
-    //搜索请求
+    //搜索绘画请求
     {pattern: /^\/ajax\/search\/artworks\//, getKey: 'search'},
     //最新绘画请求
     {pattern: /^\/ajax\/follow_latest\/illust/, getKey: 'follow_latest_illust'},
