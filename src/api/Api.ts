@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosResponse} from "axios";
+import {AxiosInstance, AxiosResponse} from "axios";
 import {ApiIllustManga} from "./ApiIllustManga";
 import {ApiBookmark} from "./ApiBookmark";
 import {ApiNovel} from "./ApiNovel";
@@ -26,7 +26,7 @@ export class Api {
 
     constructor(instance: AxiosInstance, token?: string) {
         this.instance = instance;
-
+        this.token = token;
 
         //请求拦截器
         instance.interceptors.request.use(config => {
@@ -35,29 +35,8 @@ export class Api {
                 //post请求统一添加token
                 headers && (headers['x-csrf-token'] = this.token)
             }
-            const url = config.url;
-
-            //搜索请求
-            if (url && url.startsWith("/ajax/search/artworks/")) {
-                const key = "search";
-                CancelerCache.cancel(key)
-                config.cancelToken = new axios.CancelToken(function executor(c) {
-                    CancelerCache.saveCanceler(key, c);
-                });
-                // @ts-ignore
-                config.cancelKey = key
-            }
-            //详情请求
-            if (url && /^\/ajax\/illust\/\d+$/.exec(url)) {
-                const key = "detail"
-                CancelerCache.cancel(key)
-                config.cancelToken = new axios.CancelToken(function executor(c) {
-                    CancelerCache.saveCanceler(key, c);
-                });
-                // @ts-ignore
-                config.cancelKey = key
-            }
-
+            //检查是否需要保存token
+            CancelerCache.check(config)
 
             return config;
         }, error => Promise.reject(error));
@@ -65,6 +44,7 @@ export class Api {
         //响应拦截器
         instance.interceptors.response.use(res => {
             const config = res.config;
+            //请求成功，移除canceler
             // @ts-ignore
             CancelerCache.delete(config.cancelKey)
 
@@ -75,6 +55,7 @@ export class Api {
             if (response) {
                 const {data, status, config} = response
                 const {url} = config
+                //请求失败，移除canceler
                 // @ts-ignore
                 CancelerCache.delete(config.cancelKey)
                 if (status >= 500) {

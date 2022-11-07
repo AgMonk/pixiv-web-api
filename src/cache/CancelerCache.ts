@@ -1,4 +1,4 @@
-import {Canceler} from "axios";
+import axios, {AxiosRequestConfig, Canceler} from "axios";
 
 export class CancelerCache {
     static cache = new Map<string, Canceler>()
@@ -22,4 +22,37 @@ export class CancelerCache {
     static delete(key: string) {
         CancelerCache.cache.delete(key);
     }
+
+    //检查是否是需要添加cancelToken
+    static check(config: AxiosRequestConfig) {
+        const url = config.url;
+        if (!url) {
+            return;
+        }
+        for (let i = 0; i < patterns.length; i++) {
+            const {pattern, getKey} = patterns[i]
+            if (pattern.exec(url)) {
+                const key = typeof getKey === 'function' ? getKey(config, pattern) : getKey;
+                //取消之前的请求
+                CancelerCache.cancel(key)
+                //添加 cancelToken
+                config.cancelToken = new axios.CancelToken(function executor(c) {
+                    CancelerCache.saveCanceler(key, c);
+                });
+                //保存cancelKey
+                // @ts-ignore
+                config.cancelKey = key
+            }
+        }
+
+    }
 }
+
+const patterns: Array<{ pattern: RegExp, getKey: string | ((config: AxiosRequestConfig, pattern: RegExp) => string) }> = [
+    //详情请求
+    {pattern: /^\/ajax\/illust\/\d+$/, getKey: 'detail'},
+    //搜索请求
+    {pattern: /^\/ajax\/search\/artworks\//, getKey: 'search'},
+    //最新绘画请求
+    {pattern: /^\/ajax\/follow_latest\/illust/, getKey: 'follow_latest_illust'},
+]
