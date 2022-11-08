@@ -17,10 +17,26 @@ export class ApiComment {
         })
     }
 
+    // 查询小说评论（根）
+    novelsRoots(nid: number, page: number, size: number, lang?: string): Promise<CommentBody> {
+        const params = {lang, novel_id: nid, offset: (page - 1) * size, limit: size}
+        return this.instance.get("/ajax/novels/comments/roots", {params}).then(res => {
+            return res.data.body
+        })
+    }
+
     // 查询作品回复（楼中楼）
     illustsReplies(commentId: number, page: number, lang?: string): Promise<CommentBody> {
         const params = {lang, comment_id: commentId, page}
         return this.instance.get("/ajax/illusts/comments/replies", {params}).then(res => {
+            return res.data.body
+        })
+    }
+
+    // 查询小说回复（楼中楼）
+    novelsReplies(commentId: number, page: number, lang?: string): Promise<CommentBody> {
+        const params = {lang, comment_id: commentId, page}
+        return this.instance.get("/ajax/novels/comments/replies", {params}).then(res => {
             return res.data.body
         })
     }
