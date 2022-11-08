@@ -54,4 +54,11 @@ export class ApiNovel {
         })
     }
 
+    // 查询系列的各篇标题
+    seriesTitles(seriesId: number, lang?: string): Promise<Array<{ available: Boolean, id: string, title: string }>> {
+        return this.instance.get(`/ajax/novel/series/${seriesId}/content_titles`, {params: {lang}}).then(res => {
+            return res.data.body
+        })
+    }
+
 }
