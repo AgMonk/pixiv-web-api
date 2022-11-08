@@ -5,7 +5,15 @@ export interface BookmarkTags {
     tooManyBookmarkTags: boolean
 }
 
-interface TagCount {
+export interface TagCount {
     tag: string
     cnt: number
 }
+
+export interface NovelTags {
+    tag: string
+    tag_translation: string
+    tag_yomigana: string
+    cnt: number
+}
+

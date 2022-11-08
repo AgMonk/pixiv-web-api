@@ -41,7 +41,7 @@ export class ApiBookmark {
         tags: Array<string>;
     }): Promise<number> {
         return this.instance.post("/ajax/novels/bookmarks/add", param,).then(res => {
-            return res.data.body
+            return Number(res.data.body)
         })
     }
 
