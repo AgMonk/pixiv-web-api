@@ -64,17 +64,23 @@ export class ApiComment {
     }
 
     //发布评论
-    private comment(params: {
+    comment(params: {
         type: "comment" | "stamp";
-        illustId: number;
+        illustId?: number;
+        novelId?: number;
         authorUserId: number;
-        parentId?: number | undefined;
-        comment?: string | undefined;
-        stampId?: number | undefined;
+        parentId?: number;
+        comment?: string;
+        stampId?: number;
     }): Promise<ResComment> {
-        const {authorUserId, type, comment, stampId, parentId, illustId,} = params
+        const {authorUserId, type, comment, stampId, parentId, illustId, novelId} = params
         let formData = new FormData();
-        formData.append("illust_id", "" + illustId)
+        if (illustId) {
+            formData.append("illust_id", "" + illustId)
+        }
+        if (novelId) {
+            formData.append("novel_id", "" + novelId)
+        }
         formData.append("author_user_id", "" + authorUserId)
         formData.append("type", type)
         if (parentId) {
