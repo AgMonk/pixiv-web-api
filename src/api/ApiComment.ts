@@ -1,5 +1,5 @@
 import {AxiosInstance} from "axios";
-import {CommentBody, ResComment} from "../interface/comment";
+import {CommentBody, CommentParam, ResComment} from "../interface/comment";
 
 export class ApiComment {
     private instance: AxiosInstance
@@ -41,22 +41,17 @@ export class ApiComment {
         })
     }
 
-    //贴图表情评论
-    commentStamp(illustId: number, authorUserId: number, stampId: number, parentId?: number,): Promise<ResComment> {
-        return this.comment({authorUserId, stampId, parentId, illustId, type: "stamp"})
-    }
-
-    //文字评论
-    commentText(illustId: number, authorUserId: number, comment: string, parentId?: number,): Promise<ResComment> {
-        return this.comment({authorUserId, comment, parentId, illustId, type: "comment"})
-    }
-
-    //删除评论
-    delComment(illustId: number, commentId: number): Promise<any> {
+    /**
+     * 删除评论
+     * @param id 绘画或小说id
+     * @param commentId 评论id
+     * @param isNovel 是否为小说
+     */
+    delComment(id: number, commentId: number, isNovel?: boolean): Promise<any> {
         let formData = new FormData();
-        formData.append("i_id", "" + illustId)
+        formData.append("i_id", "" + id)
         formData.append("del_id", "" + commentId)
-        return this.instance.post("/rpc_delete_comment.php", formData, {
+        return this.instance.post(isNovel ? '/novel' : '' + "/rpc_delete_comment.php", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -64,15 +59,7 @@ export class ApiComment {
     }
 
     //发布评论
-    comment(params: {
-        type: "comment" | "stamp";
-        illustId?: number;
-        novelId?: number;
-        authorUserId: number;
-        parentId?: number;
-        comment?: string;
-        stampId?: number;
-    }): Promise<ResComment> {
+    comment(params: CommentParam): Promise<ResComment> {
         const {authorUserId, type, comment, stampId, parentId, illustId, novelId} = params
         let formData = new FormData();
         if (illustId) {
