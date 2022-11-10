@@ -80,6 +80,8 @@ export class Api {
     static setCookie(phpSessionId: string, path: string) {
         let day = 24 * 60 * 60 * 1000;
         let date = new Date();
+        date.setTime(date.getTime() + -1 * day);
+        document.cookie = `PHPSESSID=;path=${path};expires=${date.toUTCString()}`
         date.setTime(date.getTime() + 365 * day);
         document.cookie = `PHPSESSID=${phpSessionId};path=${path};expires=${date.toUTCString()}`
     }
