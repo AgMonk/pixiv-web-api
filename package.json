@@ -1,6 +1,6 @@
 {
   "name": "pixiv-web-api-for-browser",
-  "version": "1.0.74",
+  "version": "1.0.75",
   "description": "pixiv-web-api",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
