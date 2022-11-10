@@ -51,7 +51,7 @@ export class ApiComment {
         let formData = new FormData();
         formData.append("i_id", "" + id)
         formData.append("del_id", "" + commentId)
-        return this.instance.post(isNovel ? '/novel' : '' + "/rpc_delete_comment.php", formData, {
+        return this.instance.post((isNovel ? '/novel' : '') + "/rpc_delete_comment.php", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
@@ -79,7 +79,7 @@ export class ApiComment {
         if (type === "stamp") {
             formData.append("stamp_id", "" + stampId)
         }
-        return this.instance.post("/rpc/post_comment.php", formData, {
+        return this.instance.post((novelId ? '/novel' : '') + "/rpc/post_comment.php", formData, {
             headers: {
                 "Content-Type": "multipart/form-data",
             }
