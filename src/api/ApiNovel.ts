@@ -61,4 +61,17 @@ export class ApiNovel {
         })
     }
 
+    // 查询系列中作品的基础信息
+    seriesContent(seriesId: number, page: number, size: number, orderBy: 'asc' | 'dsc', lang?: string): Promise<any> {
+        const offset = (page - 1) * size;
+        return this.instance.get(`/ajax/novel/series_content/${seriesId}`, {
+            params: {
+                lang, limit: size, last_order: offset, order_by: orderBy
+            }
+        }).then(res => {
+            return res.data.body
+        })
+    }
+
+
 }
