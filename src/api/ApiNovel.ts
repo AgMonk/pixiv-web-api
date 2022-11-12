@@ -1,7 +1,7 @@
 import {AxiosInstance} from "axios";
 import {NovelDetail, NovelSearchResult, NovelSeries} from "../interface/novel";
 import {FollowLatest} from "../interface/commom";
-import {DiscoveryBody} from "../interface/illust";
+import {DiscoveryBody, ResBookmarkData} from "../interface/illust";
 
 export class ApiNovel {
     private instance: AxiosInstance;
@@ -73,5 +73,11 @@ export class ApiNovel {
         })
     }
 
+    //查询收藏状态
+    bookmarkData(pid: number): Promise<ResBookmarkData> {
+        return this.instance.get(`/ajax/novel/${pid}/bookmarkData`).then(res => {
+            return res.data.body
+        })
+    }
 
 }
