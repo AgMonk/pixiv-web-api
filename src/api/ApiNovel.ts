@@ -69,7 +69,7 @@ export class ApiNovel {
                 lang, limit: size, last_order: offset, order_by: orderBy
             }
         }).then(res => {
-            return res.data.body
+            return res.data.body.seriesContents
         })
     }
 
