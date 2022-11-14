@@ -13,6 +13,7 @@ import {CancelerCache} from "../cache/CancelerCache";
 export class Api {
     instance: AxiosInstance
     token: string | undefined;
+    lang: string | undefined;
 
     illustManga: ApiIllustManga
     novel: ApiNovel;
@@ -23,9 +24,10 @@ export class Api {
     comments: ApiComment
     tag: ApiTag
 
-    constructor(instance: AxiosInstance, token?: string) {
+    constructor(instance: AxiosInstance, token?: string, lang?: string) {
         this.instance = instance;
         this.token = token;
+        this.lang = lang || 'zh';
 
         //请求拦截器
         instance.interceptors.request.use(config => {
@@ -34,8 +36,11 @@ export class Api {
                 //post请求统一添加token
                 headers && (headers['x-csrf-token'] = this.token)
             }
+            //统一添加 lang 参数
+            config.params.lang = this.lang;
             //检查是否需要保存token
             CancelerCache.check(config)
+
 
             return config;
         }, error => Promise.reject(error));
