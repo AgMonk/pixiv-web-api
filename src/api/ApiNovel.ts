@@ -23,6 +23,7 @@ export class ApiNovel {
         mode: "all" | "safe" | "r18";
         s_mode?: "s_tag" | "s_tag_only" | "s_tag_full" | "s_tc";
         gs: 0 | 1;
+        work_lang: string | "zh-cn" | "ja" | "en" | "zh-tw";
         lang?: string;
         scd?: string;
         ecd?: string;
