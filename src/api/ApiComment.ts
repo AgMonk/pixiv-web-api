@@ -10,32 +10,32 @@ export class ApiComment {
     }
 
     // 查询作品评论（根）
-    illustsRoots(illustId: number, page: number, size: number, lang?: string): Promise<CommentBody> {
-        const params = {lang, illust_id: illustId, offset: (page - 1) * size, limit: size}
+    illustsRoots(illustId: number, page: number, size: number): Promise<CommentBody> {
+        const params = {illust_id: illustId, offset: (page - 1) * size, limit: size}
         return this.instance.get("/ajax/illusts/comments/roots", {params}).then(res => {
             return res.data.body
         })
     }
 
     // 查询小说评论（根）
-    novelsRoots(nid: number, page: number, size: number, lang?: string): Promise<CommentBody> {
-        const params = {lang, novel_id: nid, offset: (page - 1) * size, limit: size}
+    novelsRoots(nid: number, page: number, size: number): Promise<CommentBody> {
+        const params = {novel_id: nid, offset: (page - 1) * size, limit: size}
         return this.instance.get("/ajax/novels/comments/roots", {params}).then(res => {
             return res.data.body
         })
     }
 
     // 查询作品回复（楼中楼）
-    illustsReplies(commentId: number, page: number, lang?: string): Promise<CommentBody> {
-        const params = {lang, comment_id: commentId, page}
+    illustsReplies(commentId: number, page: number): Promise<CommentBody> {
+        const params = {comment_id: commentId, page}
         return this.instance.get("/ajax/illusts/comments/replies", {params}).then(res => {
             return res.data.body
         })
     }
 
     // 查询小说回复（楼中楼）
-    novelsReplies(commentId: number, page: number, lang?: string): Promise<CommentBody> {
-        const params = {lang, comment_id: commentId, page}
+    novelsReplies(commentId: number, page: number): Promise<CommentBody> {
+        const params = {comment_id: commentId, page}
         return this.instance.get("/ajax/novels/comments/replies", {params}).then(res => {
             return res.data.body
         })

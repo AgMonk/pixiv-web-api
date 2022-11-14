@@ -37,7 +37,7 @@ export class Api {
                 headers && (headers['x-csrf-token'] = this.token)
             }
             //统一添加 lang 参数
-            config.params.lang = this.lang;
+            config.params = Object.assign({}, config.params, {lang: this.lang})
             //检查是否需要保存token
             CancelerCache.check(config)
 

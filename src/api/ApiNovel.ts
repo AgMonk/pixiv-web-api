@@ -10,8 +10,8 @@ export class ApiNovel {
         this.instance = instance;
     }
 
-    followLatest(p: number, mode: "all" | "r18", lang?: string): Promise<FollowLatest> {
-        return this.instance.get(`/ajax/follow_latest/novel`, {params: {p, mode, lang}}).then(res => {
+    followLatest(p: number, mode: "all" | "r18"): Promise<FollowLatest> {
+        return this.instance.get(`/ajax/follow_latest/novel`, {params: {p, mode}}).then(res => {
             return res.data.body
         })
     }
@@ -35,39 +35,39 @@ export class ApiNovel {
         })
     }
 
-    discovery(limit: number, mode: "all" | "safe" | "r18", sampleNovelId?: number, lang?: string): Promise<DiscoveryBody> {
-        return this.instance.get(`/ajax/discovery/novels`, {params: {limit, mode, lang, sampleNovelId}}).then(res => {
+    discovery(limit: number, mode: "all" | "safe" | "r18", sampleNovelId?: number): Promise<DiscoveryBody> {
+        return this.instance.get(`/ajax/discovery/novels`, {params: {limit, mode, sampleNovelId}}).then(res => {
             return res.data.body
         })
     }
 
     // 详情
-    detail(nid: number, lang?: string): Promise<NovelDetail> {
-        return this.instance.get(`/ajax/novel/` + nid, {params: {lang}}).then(res => {
+    detail(nid: number): Promise<NovelDetail> {
+        return this.instance.get(`/ajax/novel/` + nid).then(res => {
             return res.data.body
         })
     }
 
     // 查询系列
-    series(seriesId: number, lang?: string): Promise<NovelSeries> {
-        return this.instance.get(`/ajax/novel/series/` + seriesId, {params: {lang}}).then(res => {
+    series(seriesId: number): Promise<NovelSeries> {
+        return this.instance.get(`/ajax/novel/series/` + seriesId).then(res => {
             return res.data.body
         })
     }
 
     // 查询系列的各篇标题
-    seriesTitles(seriesId: number, lang?: string): Promise<Array<{ available: Boolean, id: string, title: string }>> {
-        return this.instance.get(`/ajax/novel/series/${seriesId}/content_titles`, {params: {lang}}).then(res => {
+    seriesTitles(seriesId: number): Promise<Array<{ available: Boolean, id: string, title: string }>> {
+        return this.instance.get(`/ajax/novel/series/${seriesId}/content_titles`).then(res => {
             return res.data.body
         })
     }
 
     // 查询系列中作品的基础信息
-    seriesContent(seriesId: number, page: number, size: number, orderBy: 'asc' | 'dsc', lang?: string): Promise<any> {
+    seriesContent(seriesId: number, page: number, size: number, orderBy: 'asc' | 'dsc'): Promise<any> {
         const offset = (page - 1) * size;
         return this.instance.get(`/ajax/novel/series_content/${seriesId}`, {
             params: {
-                lang, limit: size, last_order: offset, order_by: orderBy
+                limit: size, last_order: offset, order_by: orderBy
             }
         }).then(res => {
             return res.data.body.seriesContents

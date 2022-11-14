@@ -9,14 +9,14 @@ export class ApiTag {
         this.instance = instance;
     }
 
-    info(tag: string, lang?: string): Promise<TagInfo> {
-        return this.instance.get("/ajax/tag/info", {params: {tag, lang}}).then(res => {
+    info(tag: string): Promise<TagInfo> {
+        return this.instance.get("/ajax/tag/info", {params: {tag}}).then(res => {
             return res.data.body
         })
     }
 
-    suggestByWord(word: string, lang?: string): Promise<Array<{ illust_count: number, tag_name: string, total_count: number }>> {
-        return this.instance.get("/ajax/tags/suggest_by_word", {params: {word, lang}}).then(res => {
+    suggestByWord(word: string): Promise<Array<{ illust_count: number, tag_name: string, total_count: number }>> {
+        return this.instance.get("/ajax/tags/suggest_by_word", {params: {word}}).then(res => {
             return res.data.body.candidates
         })
     }
