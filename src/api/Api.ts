@@ -10,6 +10,7 @@ import {ApiComment} from "./ApiComment";
 import {ApiTag} from "./ApiTag";
 import {CancelerCache} from "../cache/CancelerCache";
 import {NovelSeriesApi} from "./NovelSeriesApi";
+import {UserWorksApi} from "./UserWorksApi";
 
 export class Api {
     instance: AxiosInstance
@@ -25,6 +26,7 @@ export class Api {
     follow: ApiFollow
     comments: ApiComment
     tag: ApiTag
+    userWorksApi: UserWorksApi;
 
     constructor(instance: AxiosInstance, token?: string, lang?: string) {
         this.instance = instance;
@@ -82,6 +84,7 @@ export class Api {
         this.follow = new ApiFollow(instance)
         this.comments = new ApiComment(instance)
         this.tag = new ApiTag(instance)
+        this.userWorksApi = new UserWorksApi(instance);
     }
 
     static setCookie(phpSessionId: string, path: string) {
