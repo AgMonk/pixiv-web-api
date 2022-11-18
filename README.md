@@ -23,7 +23,7 @@ PHPSESSID从已登陆的cookie中获取，"/pixiv-net/" 为nginx反代到官网�
 let instance = axios.create({baseURL: "/pixiv-net/", timeout: 20000});
 let api = new Api(instance, token);
 
-api.illustManga.detail(11111).then(res => {
+api.illustApi.detail(11111).then(res => {
     console.log(res)
 })
 ```

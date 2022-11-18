@@ -1,5 +1,5 @@
 import {AxiosInstance, AxiosResponse} from "axios";
-import {ApiIllustManga} from "./ApiIllustManga";
+import {IllustApi} from "./IllustApi";
 import {ApiBookmark} from "./ApiBookmark";
 import {ApiNovel} from "./ApiNovel";
 import {PixivException} from "../types/PixivException";
@@ -15,7 +15,7 @@ export class Api {
     token: string | undefined;
     lang: string | undefined;
 
-    illustManga: ApiIllustManga
+    illustApi: IllustApi
     novel: ApiNovel;
     user: ApiUser;
     ranking: ApiRanking;
@@ -51,7 +51,6 @@ export class Api {
             //请求成功，移除canceler
             // @ts-ignore
             CancelerCache.delete(config.cancelKey)
-
             console.debug(`${new Date().toLocaleString()} Request Success: `, res)
             return res;
         }, error => {
@@ -72,7 +71,7 @@ export class Api {
             throw error;
         });
 
-        this.illustManga = new ApiIllustManga(instance);
+        this.illustApi = new IllustApi(instance);
         this.novel = new ApiNovel(instance);
         this.user = new ApiUser(instance);
         this.ranking = new ApiRanking(instance);

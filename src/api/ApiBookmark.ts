@@ -60,8 +60,6 @@ export class ApiBookmark {
         return this.instance.post("/ajax/novels/bookmarks/remove", {bookmarkIds},)
     }
 
-    like(pid: number, lang?: string): Promise<any> {
-        return this.instance.post(`/ajax/illusts/like`, {illust_id: pid},)
-    }
+
 }
 
