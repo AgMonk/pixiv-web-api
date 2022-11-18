@@ -1,7 +1,7 @@
 import {AxiosInstance} from "axios";
 import {IllustRanking} from "../interface/ranking";
 
-export class ApiRanking {
+export class RankingApi {
     private instance: AxiosInstance
 
 

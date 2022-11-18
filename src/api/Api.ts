@@ -5,7 +5,7 @@ import {NovelApi} from "./NovelApi";
 import {PixivException} from "../types/PixivException";
 import {ApiFollow} from "./ApiFollow";
 import {UserApi} from "./UserApi";
-import {ApiRanking} from "./ApiRanking";
+import {RankingApi} from "./RankingApi";
 import {ApiComment} from "./ApiComment";
 import {ApiTag} from "./ApiTag";
 import {CancelerCache} from "../cache/CancelerCache";
@@ -22,7 +22,7 @@ export class Api {
     novelApi: NovelApi;
     novelSeriesApi: NovelSeriesApi;
     userApi: UserApi;
-    ranking: ApiRanking;
+    rankingApi: RankingApi;
     bookmark: ApiBookmark
     follow: ApiFollow
     comments: ApiComment
@@ -81,7 +81,7 @@ export class Api {
         this.novelApi = new NovelApi(instance);
         this.novelSeriesApi = new NovelSeriesApi(instance);
         this.userApi = new UserApi(instance);
-        this.ranking = new ApiRanking(instance);
+        this.rankingApi = new RankingApi(instance);
         this.bookmark = new ApiBookmark(instance);
         this.follow = new ApiFollow(instance)
         this.comments = new ApiComment(instance)
