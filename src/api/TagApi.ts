@@ -1,7 +1,7 @@
 import {AxiosInstance} from "axios";
 import {PixivTagInfo, TagInfo} from "../interface/tag";
 
-export class ApiTag {
+export class TagApi {
     private instance: AxiosInstance
 
 
@@ -9,8 +9,8 @@ export class ApiTag {
         this.instance = instance;
     }
 
-    info(tag: string): Promise<TagInfo> {
-        return this.instance.get("/ajax/tag/info", {params: {tag}}).then(res => {
+    illustAdd(pid: number, tag: string): Promise<PixivTagInfo> {
+        return this.instance.post(`/ajax/tags/illust/${pid}/add`, {tag}).then(res => {
             return res.data.body
         })
     }
@@ -21,8 +21,8 @@ export class ApiTag {
         })
     }
 
-    illustAdd(pid: number, tag: string): Promise<PixivTagInfo> {
-        return this.instance.post(`/ajax/tags/illust/${pid}/add`, {tag}).then(res => {
+    tagInfo(tag: string): Promise<TagInfo> {
+        return this.instance.get("/ajax/tag/info", {params: {tag}}).then(res => {
             return res.data.body
         })
     }
