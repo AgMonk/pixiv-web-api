@@ -1,7 +1,7 @@
 import {AxiosInstance, AxiosResponse} from "axios";
 import {IllustApi} from "./IllustApi";
 import {ApiBookmark} from "./ApiBookmark";
-import {ApiNovel} from "./ApiNovel";
+import {NovelApi} from "./NovelApi";
 import {PixivException} from "../types/PixivException";
 import {ApiFollow} from "./ApiFollow";
 import {ApiUser} from "./ApiUser";
@@ -16,7 +16,7 @@ export class Api {
     lang: string | undefined;
 
     illustApi: IllustApi
-    novel: ApiNovel;
+    novelApi: NovelApi;
     user: ApiUser;
     ranking: ApiRanking;
     bookmark: ApiBookmark
@@ -72,7 +72,7 @@ export class Api {
         });
 
         this.illustApi = new IllustApi(instance);
-        this.novel = new ApiNovel(instance);
+        this.novelApi = new NovelApi(instance);
         this.user = new ApiUser(instance);
         this.ranking = new ApiRanking(instance);
         this.bookmark = new ApiBookmark(instance);
