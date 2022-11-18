@@ -5,12 +5,13 @@ import {NovelApi} from "./NovelApi";
 import {PixivException} from "../types/PixivException";
 import {UserApi} from "./UserApi";
 import {RankingApi} from "./RankingApi";
-import {ApiComment} from "./ApiComment";
+import {CommentNovelApi} from "./CommentNovelApi";
 import {TagApi} from "./TagApi";
 import {CancelerCache} from "../cache/CancelerCache";
 import {NovelSeriesApi} from "./NovelSeriesApi";
 import {UserWorksApi} from "./UserWorksApi";
 import {UserBookmarkApi} from "./UserBookmarkApi";
+import {CommentIllustApi} from "./CommentIllustApi";
 
 export class Api {
     instance: AxiosInstance
@@ -23,10 +24,11 @@ export class Api {
     userApi: UserApi;
     rankingApi: RankingApi;
     bookmarkApi: BookmarkApi
-    comments: ApiComment
+    commentNovelApi: CommentNovelApi
     tagApi: TagApi
     userWorksApi: UserWorksApi;
     userBookmarkApi: UserBookmarkApi;
+    commentIllustApi: CommentIllustApi;
 
     constructor(instance: AxiosInstance, token?: string, lang?: string) {
         this.instance = instance;
@@ -81,7 +83,8 @@ export class Api {
         this.userApi = new UserApi(instance);
         this.rankingApi = new RankingApi(instance);
         this.bookmarkApi = new BookmarkApi(instance);
-        this.comments = new ApiComment(instance)
+        this.commentNovelApi = new CommentNovelApi(instance)
+        this.commentIllustApi = new CommentIllustApi(instance)
         this.tagApi = new TagApi(instance)
         this.userWorksApi = new UserWorksApi(instance);
         this.userBookmarkApi = new UserBookmarkApi(instance);
