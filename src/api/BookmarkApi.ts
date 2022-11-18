@@ -1,7 +1,7 @@
 import {AxiosInstance} from "axios";
 
 
-export class ApiBookmark {
+export class BookmarkApi {
     private instance: AxiosInstance
 
 
@@ -20,6 +20,17 @@ export class ApiBookmark {
         })
     }
 
+    addNovel(param: {
+        novel_id: number;
+        restrict: 0 | 1
+        comment: string;
+        tags: Array<string>;
+    }): Promise<number> {
+        return this.instance.post("/ajax/novels/bookmarks/add", param,).then(res => {
+            return Number(res.data.body)
+        })
+    }
+
     delIllust(bookmarkId: number): Promise<any> {
         let formData = new FormData();
         formData.append("bookmark_id", bookmarkId + "")
@@ -32,17 +43,6 @@ export class ApiBookmark {
 
     delIllusts(bookmarkIds: Array<number>): Promise<any> {
         return this.instance.post("/ajax/illusts/bookmarks/remove", {bookmarkIds},)
-    }
-
-    addNovel(param: {
-        novel_id: number;
-        restrict: 0 | 1
-        comment: string;
-        tags: Array<string>;
-    }): Promise<number> {
-        return this.instance.post("/ajax/novels/bookmarks/add", param,).then(res => {
-            return Number(res.data.body)
-        })
     }
 
     delNovel(bookmarkId: number): Promise<any> {

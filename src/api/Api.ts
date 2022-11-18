@@ -1,6 +1,6 @@
 import {AxiosInstance, AxiosResponse} from "axios";
 import {IllustApi} from "./IllustApi";
-import {ApiBookmark} from "./ApiBookmark";
+import {BookmarkApi} from "./BookmarkApi";
 import {NovelApi} from "./NovelApi";
 import {PixivException} from "../types/PixivException";
 import {ApiFollow} from "./ApiFollow";
@@ -23,7 +23,7 @@ export class Api {
     novelSeriesApi: NovelSeriesApi;
     userApi: UserApi;
     rankingApi: RankingApi;
-    bookmark: ApiBookmark
+    bookmarkApi: BookmarkApi
     follow: ApiFollow
     comments: ApiComment
     tag: ApiTag
@@ -82,7 +82,7 @@ export class Api {
         this.novelSeriesApi = new NovelSeriesApi(instance);
         this.userApi = new UserApi(instance);
         this.rankingApi = new RankingApi(instance);
-        this.bookmark = new ApiBookmark(instance);
+        this.bookmarkApi = new BookmarkApi(instance);
         this.follow = new ApiFollow(instance)
         this.comments = new ApiComment(instance)
         this.tag = new ApiTag(instance)
