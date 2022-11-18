@@ -9,6 +9,7 @@ import {ApiRanking} from "./ApiRanking";
 import {ApiComment} from "./ApiComment";
 import {ApiTag} from "./ApiTag";
 import {CancelerCache} from "../cache/CancelerCache";
+import {NovelSeriesApi} from "./NovelSeriesApi";
 
 export class Api {
     instance: AxiosInstance
@@ -17,6 +18,7 @@ export class Api {
 
     illustApi: IllustApi
     novelApi: NovelApi;
+    novelSeriesApi: NovelSeriesApi;
     user: ApiUser;
     ranking: ApiRanking;
     bookmark: ApiBookmark
@@ -73,6 +75,7 @@ export class Api {
 
         this.illustApi = new IllustApi(instance);
         this.novelApi = new NovelApi(instance);
+        this.novelSeriesApi = new NovelSeriesApi(instance);
         this.user = new ApiUser(instance);
         this.ranking = new ApiRanking(instance);
         this.bookmark = new ApiBookmark(instance);
@@ -97,10 +100,6 @@ export class Api {
         document.cookie = `PHPSESSID=;path=${path};expires=${date.toUTCString()}`
     }
 
-    isTokenReady(): boolean {
-        return this.token !== undefined;
-    }
-
     fetchToken(): Promise<string | undefined> {
         let pattern = /id="meta-global-data" content='(.+?)'>/
         return this.instance.get("/setting_user.php").then(res => {
@@ -113,6 +112,10 @@ export class Api {
             }
             return undefined
         })
+    }
+
+    isTokenReady(): boolean {
+        return this.token !== undefined;
     }
 
 }
