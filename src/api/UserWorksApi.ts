@@ -27,14 +27,14 @@ export class UserWorksApi {
         })
     }
 
-    // 查询用户绘画使用的标签
+    // 查询用户插画使用的标签
     illustTags(uid: number): Promise<NovelTags[]> {
         return this.instance.get(`/ajax/user/${uid}/illusts/tags`).then(res => {
             return res.data.body
         })
     }
 
-    // 查询用户绘画
+    // 查询用户插画
     illusts(uid: number, ids: number[]): Promise<Profiles> {
         const params = {ids, is_first_page: 1, work_category: "illustManga"}
         return this.instance.get(`/ajax/user/${uid}/profile/illusts`, {params}).then(res => {
@@ -45,6 +45,13 @@ export class UserWorksApi {
     // 查询带有指定标签的用户插画
     illustsWithTag(uid: number, params: WorksWithTagParam): Promise<UserWorksWithTag<IllustInfo>> {
         return this.instance.get(`/ajax/user/${uid}/illusts/tag`, {params}).then(res => {
+            return res.data.body
+        })
+    }
+
+    // 查询用户漫画使用的标签
+    mangaTags(uid: number): Promise<NovelTags[]> {
+        return this.instance.get(`/ajax/user/${uid}/manga/tags`).then(res => {
             return res.data.body
         })
     }
