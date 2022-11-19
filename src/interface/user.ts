@@ -61,6 +61,13 @@ export interface Profiles {
     zoneConfig: ZoneConfig;
 }
 
+export interface UserWorksWithTag<T> {
+    extraData: { meta: object };
+    works: Array<T>;
+    total: number;
+    zoneConfig: ZoneConfig;
+}
+
 export interface CommissionRequestSent {
     illustSeries: object
     page: {

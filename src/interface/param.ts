@@ -8,3 +8,9 @@ export interface UserBookmarksParam {
     rest: "show" | "hide"
     lang?: string;
 }
+
+export interface WorksWithTagParam {
+    tag: string;
+    offset: number;
+    limit: number;
+}
