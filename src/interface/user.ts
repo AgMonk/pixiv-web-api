@@ -72,11 +72,11 @@ export interface CommissionRequestSent {
     illustSeries: object
     page: {
         sentArtworkCount: number
-        sentArtworkRequestIds: Array<number>
+        sentArtworkRequestIds: Array<string>
         sentNovelCount: number
-        sentNovelRequestIds: Array<number>
+        sentNovelRequestIds: Array<string>
     }
-    requests: Array<any>
+    requests: Array<CommissionRequest>
     tagTranslation: object
     thumbnails: Thumbnails
     users: Array<UserInfo>
@@ -110,4 +110,77 @@ export interface UserRecommend {
         illustIds: string[]
         novelIds: string[]
     }>
+}
+
+export interface CommissionRequest {
+    requestId: string,
+    planId: string,
+    fanUserId: string,
+    creatorUserId: string,
+    requestStatus: string,
+    requestPostWorkType: string,
+    requestPrice: number,
+    requestProposal: {
+        requestOriginalProposal: string,
+        requestOriginalProposalHtml: string,
+        requestOriginalProposalLang: string,
+        requestTranslationProposal: Array<{
+            requestProposal: string
+            requestProposalHtml: string
+            requestProposalLang: string
+        }>
+    },
+    requestTags: string[],
+    requestAdultFlg: boolean,
+    requestAnonymousFlg: boolean,
+    requestRestrictFlg: boolean,
+    requestAcceptCollaborateFlg: boolean,
+    requestResponseDeadlineDatetime: string,
+    requestPostDeadlineDatetime: string,
+    role: string,
+    plan: {
+        currentPlanId: any,
+        planId: string,
+        creatorUserId: string,
+        planAcceptRequestFlg: boolean,
+        planStandardPrice: number,
+        planTitle: {
+            planOriginalTitle: string,
+            planOriginalTitleLang: string,
+            planTranslationTitle: any[]
+        },
+        planDescription: {
+            planOriginalDescription: string
+            planOriginalDescriptionHtml: string
+            planOriginalLang: string
+            planTranslationDescription: {
+                ja: {
+                    planDescription: string
+                    planDescriptionHtml: string
+                    planLang: string
+                }
+            }
+        },
+        planAcceptAdultFlg: boolean,
+        planAcceptAnonymousFlg: boolean,
+        planAcceptIllustFlg: boolean,
+        planAcceptUgoiraFlg: boolean,
+        planAcceptMangaFlg: boolean,
+        planAcceptNovelFlg: boolean,
+        planCoverImage: any
+    },
+    collaborateStatus: {
+        collaborating: boolean,
+        collaborateAnonymousFlg: boolean,
+        collaboratedCnt: number,
+        collaborateUserSamples: any[]
+    },
+    postWork: {
+        postWorkId: string,
+        postWorkType: string,
+        work: {
+            isUnlisted: boolean,
+            secret: any
+        }
+    }
 }
