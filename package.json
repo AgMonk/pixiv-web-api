@@ -1,12 +1,14 @@
 {
   "name": "pixiv-web-api-for-browser",
-  "version": "1.0.89",
+  "version": "1.0.90",
   "description": "pixiv-web-api",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
   "scripts": {
-    "pub": "npm publish --access public && rmdir dist /s /q",
-    "ver": "git add . && git commit -m \"publish to npm\" && npm version patch",
+    "clear": "rmdir dist /s /q",
+    "package": "tsc",
+    "pub": "npm publish --access public",
+    "patch": "npm version patch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
