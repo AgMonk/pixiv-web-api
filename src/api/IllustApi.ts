@@ -96,6 +96,8 @@ export class IllustApi {
         order: "date_d" | "date";
         scd?: string;
         ecd?: string;
+        // 当“显示AI作品”开关开启时，传1可以隐藏AI作品
+        ai_type?:1;
     }): Promise<IllustSearchResult> {
         return this.instance.get("/ajax/search/artworks/" + keywords, {params}).then(res => {
             return res.data.body
